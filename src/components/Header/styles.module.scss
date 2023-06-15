@@ -1,0 +1,156 @@
+.containerNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5.5em;
+  background-color: var(--grey-50);
+}
+.navList {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--blue-900);
+  svg {
+    width: 2.5em;
+    height: 2em;
+    margin-top: 2em;
+    border-radius: 5px;
+    border: none;
+    
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-top: 1.3em;
+  }
+}
+.items {
+  width: 40%;
+  padding: .7em;
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  li {
+    
+    margin: 0 1em;
+    list-style-type: none;
+   
+    transition: all  500ms ease;
+    border-radius: 1vh;
+    color: var(--blue-100);
+  }
+}
+.li{
+  padding: .5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(120deg,var(--white), var(--blue-900));
+  background-repeat: no-repeat;
+  background-size: 0 3px;
+  background-position:  left bottom;
+  transition: background-size 500ms ease;
+}
+
+.li:hover{
+    color: var(--blue-100);
+    background-size: 100% 3px;
+}
+.init{
+
+  font-size: 1.5rem;
+  color: var(--grey-100);
+}
+.bar{
+  width: 2px;
+  height: 2em;
+  margin-top: .6em;
+  background-color: var(--grey-100);
+}
+.client{
+  background-color:var(--blue-100);
+  padding: 2.5px;
+
+}
+.liClient{
+  display: flex;
+  padding: .6em;
+  font-size: 1.3em;
+  color: var(--blue-900);
+  
+}
+.client:hover{
+  background-color: var(--blue-hover);
+}
+
+.driver{
+  display: flex;
+  background-color: var(--blue-900);
+  padding: .5em;
+  
+}
+.liDriver{
+  padding: .5em;
+  font-size: 1.3em;
+  color: var(--white);
+
+}
+.driver:hover{
+  background-color: var(--blue-1000);
+}
+@media (max-width: 760px){
+  .navList {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 500px){
+  .logo{
+    svg{
+      width: 1.2em;
+    }
+    h1{
+      font-size: 1.2em;
+    }
+  }
+  .items{
+    width: 100%;
+
+  }
+
+  .li{
+    padding: 0;
+  }
+  .init{
+    font-size: 1rem;
+  }
+  .liClient{
+    font-size: 1em;
+  }
+  .client{
+    padding: 0;
+    height: 2em;
+  }
+  .liDriver{
+    font-size: 1em;
+  }
+  .driver{
+    padding: 0;
+    height: 2em;
+  }
+}
