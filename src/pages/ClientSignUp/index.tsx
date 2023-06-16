@@ -21,7 +21,7 @@ export default function ClientSignUp() {
           </div>
       <div className={styles.logo}>
           <BsGeoAltFill />
-          <h1>Cadastre-se como usuario</h1>
+          <h1>Easy Route</h1>
         </div>
         <form>
           <Input placeholder="Digite o nome do cliente" type="text" />
