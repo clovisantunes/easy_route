@@ -3,14 +3,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 5.5em;
+  height: 4em;
   position: fixed;
   background-color: var(--dark-700);
   z-index: 1;
 
 }
 .navList {
-  width: 70%;
+  width: 95%;
   height: 80%;
   display: flex;
   justify-content: space-between;
@@ -40,7 +40,8 @@
 }
 .items {
   width: 40%;
-  padding: .7em;
+  height: 3em;
+
   ul {
     display: flex;
     flex-direction: row;
@@ -90,12 +91,11 @@
 }
 .client{
   background-color:var(--blue-100);
-  padding: 2.5px;
 
 }
 .liClient{
   display: flex;
-  padding: .6em;
+  padding: .3em;
   font-size: 1.3em;
   font-weight: 300;
   color: var(--blue-900);
@@ -112,7 +112,7 @@
   
 }
 .liDriver{
-  padding: .5em;
+
   font-size: 1.3em;
   font-weight: 300;
   color: var(--white);

@@ -70,7 +70,7 @@ export default function ClientSignIn() {
             <Button type="submit">Login</Button>
           </form>
           <span>
-            <Link href={"/ClientRegister"} legacyBehavior>
+            <Link href={"/Client/ClientRegister"} legacyBehavior>
               Não possui conta? Cadastre-se
             </Link>
           </span>
