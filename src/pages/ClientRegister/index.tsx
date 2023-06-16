@@ -67,7 +67,7 @@ export default function ClientRegister() {
             <span>Acesse sua conta agora mesmo</span>
 
             <Button>
-              <Link href={'./ClientSignIn'}>
+              <Link href={'./ClientSignIn'} legacyBehavior>
               Entrar
               </Link>
               </Button>

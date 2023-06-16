@@ -123,13 +123,13 @@
 }
 @media (max-width: 760px){
   .navList {
-    width: 100%;
+    width: 75%;
     height: 80%;
     display: flex;
     justify-content: space-between;
   }
 }
-@media (max-width: 500px){
+@media (max-width: 660px){
   .logo{
     svg{
       width: 1.2em;
