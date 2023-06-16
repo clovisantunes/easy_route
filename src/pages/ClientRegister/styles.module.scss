@@ -39,9 +39,13 @@
         font-size: 1.3em;
         border-radius: 2em;
         border: none;
-        background-color: var(--black);
+        background-color: var(--blue-900);
         color: var(--white);
     }
+
+}
+.registerContainer button:hover{
+    background-color: var(--black);
 }
 .logo {
     display: flex;
@@ -64,5 +68,16 @@
     h1 {
       font-size: 2em;
       margin-top: .5em;
+    }
+  }
+  @media (max-width: 500px){
+    .registerContainer{
+        width: 90%;
+        h1{
+            font-size: 1.2em;
+        }
+        button{
+            width: 30%;
+        }
     }
   }

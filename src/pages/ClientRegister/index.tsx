@@ -9,14 +9,14 @@ export default function ClientRegister() {
   return (
     <>
       <Head>
-        <title>Easy Route - Cadastro</title>
+        <title>Easy Route - Cadastro de cliente</title>
       </Head>
       <Navbar />
       <div className={styles.container}>
         <div className={styles.registerContainer}>
       <div className={styles.logo}>
           <BsGeoAltFill />
-          <h1>Easy Route</h1>
+          <h1>Cadastre-se como usuario</h1>
         </div>
         <form>
           <Input placeholder="Digite o nome do cliente" type="text" />
