@@ -8,7 +8,7 @@ import { Navbar } from "@/components/Header";
 import Link from "next/link";
 import { AuthContext } from "@/contexts/AuthContext";
 
-export default function ClientSignUp() {
+export default function ClientSignIn() {
   const { signIn } = useContext(AuthContext);
 
   const [nome, setnome] = useState("");
