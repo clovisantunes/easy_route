@@ -7,6 +7,7 @@ type AuthContextData = {
     signIn: (credentials: SignInProps) => Promise<void>;
     signOut: () => void;
     signUp:(credentials: SignUpProps) => Promise<void>
+    signUpDriver: (credentials: SignUpDriverProps) =>Promise<void>
 }
 
 
@@ -41,6 +42,17 @@ type UserProps = {
     cidade: string,
     uf: string
   }
+// types do Driver
+
+
+
+  type SignUpDriverProps = {
+    nome: string,
+    numeroHabilitacao: string,
+    categoriaHabilitacao: string,
+    vencimentoHabilitacao: string,
+  }
+
 
 export  const AuthContext = createContext ({} as AuthContextData)
 
@@ -51,7 +63,9 @@ export function signOut(){
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  
 
+  // Cadastro de Usuario
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user;
 
@@ -89,9 +103,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
       
     }
     
+    //Cadastro de Condutor
+
+
+
+async function signUpDriver({nome, numeroHabilitacao, categoriaHabilitacao, vencimentoHabilitacao}: SignUpDriverProps){
+
+  try{
+    const response = await api.post('/Condutor',{
+      nome,
+      numeroHabilitacao,
+      categoriaHabilitacao,
+      vencimentoHabilitacao
+    })
+    console.log(response.data)
+
+    Router.push('/')
+
+
+  }catch(err){
+    console.log("Erro ao cadastrar condutor", err)
+  }
+}
 
     return(
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver }}>
             {children}
         </AuthContext.Provider>
     )

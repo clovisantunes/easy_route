@@ -12,35 +12,12 @@ export default function ClientSignIn() {
   const { signIn } = useContext(AuthContext);
 
   const [nome, setnome] = useState("");
-  const [numeroDocumento, setNumeroDocumento] = useState("");
+  const [numeroHabilitação, setNumeroHabilitação] = useState("");
 
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(event: FormEvent) {
-    event.preventDefault();
 
-    try {
-      setLoading(true);
-
-      const data = {
-        nome,
-        numeroDocumento,
-      };
-
-      await signIn(data);
-
-      const user = {
-        nome,
-        numeroDocumento,
-      };
-      localStorage.setItem("user", JSON.stringify(user));
-
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log("Ocorreu um erro no login:", error);
-    }
-  }
+  
   return (
     <>
       <Head>
@@ -54,7 +31,7 @@ export default function ClientSignIn() {
             <BsGeoAltFill />
             <h1>Easy Route</h1>
           </div>
-          <form onSubmit={handleLogin}>
+          <form>
             <Input
               placeholder="Digite o nome do condutor"
               type="text"
@@ -62,15 +39,15 @@ export default function ClientSignIn() {
               onChange={(e) => setnome(e.target.value)}
             />
             <Input
-              placeholder="Numero do documento"
+              placeholder="Numero da Habilitação"
               type="text"
-              value={numeroDocumento}
-              onChange={(e) => setNumeroDocumento(e.target.value)}
+              value={numeroHabilitação}
+              onChange={(e) => setNumeroHabilitação(e.target.value)}
             />
             <Button type="submit">Login</Button>
           </form>
           <span>
-            <Link href={"/DriverRegister"} legacyBehavior>
+            <Link href={"/Driver/DriverSignUp"} legacyBehavior>
               Não possui conta? Cadastre-se
             </Link>
           </span>

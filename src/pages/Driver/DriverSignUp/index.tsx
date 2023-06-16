@@ -1,36 +1,57 @@
+import { useState, FormEvent, useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import { Navbar } from "@/components/Header";
 import Head from "next/head";
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 import { Button } from "@/components/UI/Button/Index";
 import Link from "next/link";
 import { Input } from "@/components/UI/Input";
-import { useState } from "react";
 
-export default function DriverSignUp(){
+export default function DriverSignUp() {
+  const {signUpDriver} = useContext(AuthContext);
+  
+  const [nome, setnome] = useState("");
+  const [numeroHabilitacao, setNumeroHabilitacao] = useState("");
+  const [categoriaHabilitacao, setCategoriaHabilitacao] = useState("");
+  const [vencimentoHabilitacao, setVencimentoHabilitacao] = useState("")
+
+  const [loading, setLoading] = useState(false);
 
 
-    const [nome, setnome] = useState("");
-    const [numeroHabilitação, setNumeroHabilitação] = useState("");
-    const [categoriaHabilitação, setCategoriaHabilitação] = useState("");
-    const [vencimentoHabilitação, setVencimentoHabilitação] = useState("");
+
+async function handleSignUpDriver(event: FormEvent){
+  event.preventDefault();
+  if(nome === ''|| numeroHabilitacao === ''|| categoriaHabilitacao === ''){
+    alert("Preencha todos os campos")
+  }
+  let data = {
+    nome,
+    numeroHabilitacao,
+    categoriaHabilitacao,
+    vencimentoHabilitacao
+  }
+  await signUpDriver(data)
+  console.log(data)
+  return;
+
+  
+
+}
 
 
-
-
-    return(
-        <>
-        <Head>
+  return (
+    <>
+      <Head>
         <title>Easy Route - Cadastro de condutor</title>
       </Head>
       <Navbar />
       <div className={styles.container}>
         <div className={styles.registerContainer}>
-          <div className={styles.containerLeft}>
-          </div>
+          <div className={styles.containerLeft}></div>
           <div className={styles.logo}>
             <h1>Cadastre-se como condutor</h1>
           </div>
-          <form>
+          <form onSubmit={handleSignUpDriver}>
             <div className={styles.inputWrapper}>
               <Input
                 placeholder="Digite o nome do cliente"
@@ -41,26 +62,24 @@ export default function DriverSignUp(){
               <Input
                 placeholder="Numero do documento"
                 type="text"
-                value={numeroHabilitação}
-                onChange={(e) => setNumeroHabilitação(e.target.value)}
+                value={numeroHabilitacao}
+                onChange={(e) => setNumeroHabilitacao(e.target.value)}
               />
             </div>
 
             <div className={styles.inputWrapper}>
               <Input
-                placeholder="Tipo de documento"
+                placeholder="Categoria da habilitação"
                 type="text"
-                value={categoriaHabilitação}
-                onChange={(e) => setCategoriaHabilitação(e.target.value)}
+                value={categoriaHabilitacao}
+                onChange={(e) => setCategoriaHabilitacao(e.target.value)}
               />
               <Input
                 placeholder="Logradouro"
-                type="text"
-                value={vencimentoHabilitação}
-                onChange={(e) => setVencimentoHabilitação(e.target.value)}
+                type="datetime-local"
+                value={vencimentoHabilitacao}
+                onChange={(e) => setVencimentoHabilitacao(e.target.value)}
               />
-
-
             </div>
             <div className={styles.buttonWrapper}>
               <Button>Cadastrar</Button>
@@ -68,18 +87,16 @@ export default function DriverSignUp(){
           </form>
         </div>
         <div className={styles.loginContainer}>
-            <h1>Bem-Vindo</h1>
-            <span>Acesse sua conta agora mesmo</span>
+          <h1>Bem-Vindo</h1>
+          <span>Acesse sua conta agora mesmo</span>
 
-            <Button>
-              <Link href={'./DriverSignIn'} legacyBehavior>
+          <Button>
+            <Link href={"./DriverSignIn"} legacyBehavior>
               Entrar
-              </Link>
-              </Button>
-
+            </Link>
+          </Button>
         </div>
       </div>
-
-        </>
-    )
+    </>
+  );
 }
