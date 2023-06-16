@@ -4,12 +4,13 @@ import Head from "next/head";
 import { BsGeoAltFill } from "react-icons/bs";
 import { Button } from "@/components/UI/Button/Index";
 import { Navbar } from "@/components/Header";
+import Link from "next/link";
 
-export default function ClientRegister() {
+export default function ClientSignUp() {
   return (
     <>
       <Head>
-        <title>Easy Route - Cadastro de cliente</title>
+        <title>Easy Route - Login de cliente</title>
       </Head>
       <Navbar />
       <div className={styles.container}>
@@ -25,13 +26,13 @@ export default function ClientRegister() {
         <form>
           <Input placeholder="Digite o nome do cliente" type="text" />
           <Input placeholder="Numero do documento" type="text" />
-          <Input placeholder="Tipo de documento" type="text" />
-          <Input placeholder="Logradouro" type="text" />
-          <Input placeholder="Bairro" type="text" />
-          <Input placeholder="Cidade" type="text" />
-          <Input placeholder="Estado" type="text" maxLength={3} />
         </form>
-          <Button>Cadastrar</Button>
+          <Button>Login</Button>
+          <span>
+            <Link href={"/ClientRegister"} legacyBehavior>
+            Não possui conta? Cadastre-se
+            </Link>
+            </span>
         </div>
       </div>
     </>

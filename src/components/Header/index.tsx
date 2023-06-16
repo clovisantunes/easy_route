@@ -24,7 +24,7 @@ export function Navbar() {
           </li>
             <div className={styles.bar}/>
           <li className={styles.client}>
-            <Link href="/ClientRegister" legacyBehavior>
+            <Link href="/ClientSignUp" legacyBehavior>
             <a  className={styles.liClient}>Cliente</a>
             </Link>
           </li>
