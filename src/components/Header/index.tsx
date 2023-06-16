@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import { BsGeoAltFill } from "react-icons/bs";
 
+
+import Link from "next/link";
 export function Navbar() {
 
 
@@ -16,11 +18,15 @@ export function Navbar() {
         <div className={styles.items}>
           <ul>
           <li className={styles.li}>
-            <a className={styles.init} href="#">Inicio</a>
+            <Link href={'/#'} legacyBehavior>
+            <a className={styles.init} >Inicio</a>
+            </Link>
           </li>
             <div className={styles.bar}/>
           <li className={styles.client}>
-            <a  className={styles.liClient}href="#">Cliente</a>
+            <Link href="/ClientRegister" legacyBehavior>
+            <a  className={styles.liClient}>Cliente</a>
+            </Link>
           </li>
           <li className={styles.driver}>
             <a className={styles.liDriver} href="#">Condutor</a>

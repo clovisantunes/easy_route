@@ -3,16 +3,18 @@
   padding: 0;
   outline: 0;
   box-sizing: border-box;
+  
 }
 
 :root{
 
   --white: #fff;
-  --black: #000;
+  --black: #111F3D;
 
   --grey: rgba(177, 179, 194, 0.14901960784313725);
   --dark-700: #1d1d2e;
-
+  --pink-100:#F897AF; 
+  --pink-500: #F44571;
   --grey-100: #726f6f;
   --blue-100: #1bb0ce;
   --blue-900:#376DF7;
@@ -35,7 +37,8 @@ a{
   cursor: pointer;
 }
 body{
-  background-color: var(--white);
+  background-color: var(--dark-700);
+  font-family: "Raleway", arial, sans-serif;
 }
 
 body,input,textarea, select, button{
