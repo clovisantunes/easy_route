@@ -8,36 +8,40 @@ import Link from "next/link";
 import { Input } from "@/components/UI/Input";
 
 export default function DriverSignUp() {
-  const {signUpDriver} = useContext(AuthContext);
-  
+  const { signUpDriver } = useContext(AuthContext);
+
   const [nome, setnome] = useState("");
   const [numeroHabilitacao, setNumeroHabilitacao] = useState("");
   const [categoriaHabilitacao, setCategoriaHabilitacao] = useState("");
-  const [vencimentoHabilitacao, setVencimentoHabilitacao] = useState("")
+  const [vencimentoHabilitacao, setVencimentoHabilitacao] = useState("");
 
   const [loading, setLoading] = useState(false);
 
+  async function handleSignUpDriver(event: FormEvent) {
+    event.preventDefault();
+    if (
+      nome === "" ||
+      numeroHabilitacao === "" ||
+      categoriaHabilitacao === ""
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
+    setLoading(true)
 
 
-async function handleSignUpDriver(event: FormEvent){
-  event.preventDefault();
-  if(nome === ''|| numeroHabilitacao === ''|| categoriaHabilitacao === ''){
-    alert("Preencha todos os campos")
+    let data = {
+      nome,
+      numeroHabilitacao,
+      categoriaHabilitacao,
+      vencimentoHabilitacao,
+    };
+    await signUpDriver(data);
+    
+
+    setLoading(false);
+    return;
   }
-  let data = {
-    nome,
-    numeroHabilitacao,
-    categoriaHabilitacao,
-    vencimentoHabilitacao
-  }
-  await signUpDriver(data)
-  console.log(data)
-  return;
-
-  
-
-}
-
 
   return (
     <>
@@ -82,7 +86,11 @@ async function handleSignUpDriver(event: FormEvent){
               />
             </div>
             <div className={styles.buttonWrapper}>
-              <Button>Cadastrar</Button>
+              <Button type="submit" loading={loading}>
+                <Link href={'/Dashboard'} legacyBehavior>
+                     Cadastrar
+                </Link>
+              </Button>
             </div>
           </form>
         </div>

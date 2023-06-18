@@ -44,7 +44,11 @@ export default function ClientSignIn() {
               value={numeroHabilitação}
               onChange={(e) => setNumeroHabilitação(e.target.value)}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit" loading={loading}>
+              <Link href={'/Dashboard'}legacyBehavior>
+                Login
+              </Link>
+              </Button>
           </form>
           <span>
             <Link href={"/Driver/DriverSignUp"} legacyBehavior>

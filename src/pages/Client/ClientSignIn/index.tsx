@@ -28,7 +28,7 @@ export default function ClientSignIn() {
       };
 
       await signIn(data);
-
+      setLoading(false)
       const user = {
         nome,
         numeroDocumento,
@@ -67,7 +67,11 @@ export default function ClientSignIn() {
               value={numeroDocumento}
               onChange={(e) => setNumeroDocumento(e.target.value)}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit" loading={loading}>
+            <Link href={'/#'}legacyBehavior>
+                Login
+              </Link>
+              </Button>
           </form>
           <span>
             <Link href={"/Client/ClientRegister"} legacyBehavior>

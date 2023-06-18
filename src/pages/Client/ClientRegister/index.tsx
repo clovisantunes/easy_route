@@ -2,12 +2,11 @@ import { useContext, FormEvent, useState } from "react";
 import { Input } from "@/components/UI/Input";
 import styles from "./styles.module.scss";
 import Head from "next/head";
-import { BsGeoAltFill  } from "react-icons/bs";
+import { BsGeoAltFill } from "react-icons/bs";
 import { Button } from "@/components/UI/Button/Index";
 import { Navbar } from "@/components/Header";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
-
 
 export default function ClientRegister() {
   const { signUp } = useContext(AuthContext);
@@ -53,6 +52,7 @@ export default function ClientRegister() {
       uf,
     };
     await signUp(data);
+    setLoading(false);
   }
 
   return (
@@ -63,19 +63,17 @@ export default function ClientRegister() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.loginContainer}>
-            <h1>Bem-Vindo</h1>
-            <span>Acesse sua conta agora mesmo</span>
+          <h1>Bem-Vindo</h1>
+          <span>Acesse sua conta agora mesmo</span>
 
-            <Button>
-              <Link href={'/Client/ClientSignIn'} legacyBehavior>
+          <Button>
+            <Link href={"/Client/ClientSignIn"} legacyBehavior>
               Entrar
-              </Link>
-              </Button>
-
+            </Link>
+          </Button>
         </div>
         <div className={styles.registerContainer}>
-          <div className={styles.containerLeft}>
-          </div>
+          <div className={styles.containerLeft}></div>
           <div className={styles.logo}>
             <h1>Cadastre-se como usuario</h1>
           </div>
@@ -108,27 +106,21 @@ export default function ClientRegister() {
                 value={logradouro}
                 onChange={(e) => setLogradouro(e.target.value)}
               />
-
-
             </div>
             <div className={styles.inputWrapper}>
-
               <Input
                 placeholder="Numero"
                 type="number"
                 value={numero}
                 onChange={(e) => setNumero(e.target.value)}
-              >
-            
-                </Input>
+              ></Input>
               <Input
                 placeholder="Bairro"
                 type="text"
                 value={bairro}
                 onChange={(e) => setBairro(e.target.value)}
               />
-
-              </div>
+            </div>
             <div className={styles.inputWrapper}>
               <Input
                 placeholder="Cidade"
@@ -145,7 +137,11 @@ export default function ClientRegister() {
               />
             </div>
             <div className={styles.buttonWrapper}>
-              <Button>Cadastrar</Button>
+              <Button loading={loading}>
+                <Link href={"/#"} legacyBehavior>
+                  Cadastrar
+                </Link>
+              </Button>
             </div>
           </form>
         </div>
