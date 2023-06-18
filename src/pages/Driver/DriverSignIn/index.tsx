@@ -1,4 +1,5 @@
-import { useContext, FormEvent, useState } from "react";
+import { useContext, FormEvent, useState, useEffect } from "react";
+import Router from "next/router";
 import { Input } from "@/components/UI/Input";
 import styles from "./styles.module.scss";
 import Head from "next/head";
@@ -16,7 +17,12 @@ export default function ClientSignIn() {
 
   const [loading, setLoading] = useState(false);
 
-
+  useEffect(() => {
+    const driveUser = localStorage.getItem("driverId");
+    if (driveUser) {
+      Router.push("/dashboard");
+    }
+  }, []);
   
   return (
     <>
@@ -45,7 +51,7 @@ export default function ClientSignIn() {
               onChange={(e) => setNumeroHabilitação(e.target.value)}
             />
             <Button type="submit" loading={loading}>
-              <Link href={'/Dashboard'}legacyBehavior>
+              <Link href={'/#'}legacyBehavior>
                 Login
               </Link>
               </Button>

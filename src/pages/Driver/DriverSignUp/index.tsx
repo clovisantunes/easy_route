@@ -1,3 +1,5 @@
+import { useEffect} from 'react';
+import Router from 'next/router';
 import { useState, FormEvent, useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Navbar } from "@/components/Header";
@@ -6,6 +8,9 @@ import styles from "./styles.module.scss";
 import { Button } from "@/components/UI/Button/Index";
 import Link from "next/link";
 import { Input } from "@/components/UI/Input";
+import { toast } from "react-toastify";
+
+
 
 export default function DriverSignUp() {
   const { signUpDriver } = useContext(AuthContext);
@@ -24,7 +29,7 @@ export default function DriverSignUp() {
       numeroHabilitacao === "" ||
       categoriaHabilitacao === ""
     ) {
-      alert("Preencha todos os campos");
+      toast.error("Preencha todos os campos");
       return;
     }
     setLoading(true)
@@ -42,6 +47,15 @@ export default function DriverSignUp() {
     setLoading(false);
     return;
   }
+
+
+  useEffect(() => {
+    const driveUser = localStorage.getItem("driverId");
+    if (driveUser) {
+      Router.push("/dashboard");
+    }
+  }, []);
+
 
   return (
     <>
@@ -87,9 +101,9 @@ export default function DriverSignUp() {
             </div>
             <div className={styles.buttonWrapper}>
               <Button type="submit" loading={loading}>
-                <Link href={'/Dashboard'} legacyBehavior>
+              
                      Cadastrar
-                </Link>
+                
               </Button>
             </div>
           </form>

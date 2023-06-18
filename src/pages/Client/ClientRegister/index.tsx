@@ -7,7 +7,7 @@ import { Button } from "@/components/UI/Button/Index";
 import { Navbar } from "@/components/Header";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
-
+import { toast } from "react-toastify";
 export default function ClientRegister() {
   const { signUp } = useContext(AuthContext);
 
@@ -35,7 +35,7 @@ export default function ClientRegister() {
       uf === "" ||
       numero === ""
     ) {
-      alert("Preencha todos os campos");
+      toast.error("Preencha todos os campos");
       return;
     }
 
@@ -138,9 +138,9 @@ export default function ClientRegister() {
             </div>
             <div className={styles.buttonWrapper}>
               <Button loading={loading}>
-                <Link href={"/#"} legacyBehavior>
+                
                   Cadastrar
-                </Link>
+          
               </Button>
             </div>
           </form>

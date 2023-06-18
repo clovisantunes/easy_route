@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Router from "next/router";
 import { api } from "@/services/apiClient";
+import { toast } from "react-toastify";
+
 
 type AuthContextData = {
   user?: UserProps;
@@ -102,6 +104,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
       const idUser = response.data;
       localStorage.setItem("userId", String(idUser));
+
+      toast.success('Usuario criado com sucesso')
+
+      Router.push('/#')
     } catch (err) {
       console.log("Erro ao cadatrar", err);
     }
@@ -124,8 +130,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
       const idDriver = response.data;
       localStorage.setItem("driverId", String(idDriver));
-      console.log(idDriver)
+      
+      toast.success('Cadastrado com sucesso')
+
+
+      Router.push('/Dashboard')
     } catch (err) {
+      toast.error('Erro ao cadastrar')
       console.log("Erro ao cadastrar condutor", err);
     }
   }

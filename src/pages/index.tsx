@@ -7,7 +7,6 @@ import { BsGeoAltFill } from "react-icons/bs";
 import { Button } from "@/components/UI/Button/Index";
 import { MainItens } from "@/components/MainItens/Index";
 
-
 export default function Home() {
   return (
     <>
@@ -50,3 +49,5 @@ export default function Home() {
     </>
   );
 }
+
+

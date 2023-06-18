@@ -18,7 +18,7 @@ export function MainItens() {
             Venha ter uma velocidade e resolutividade através de um atendimento organizado com tags e etiquetas fáceis de localizar.
             </span>
             <Button className={styles.buttonItems}>
-            <Link href={'/ClientRegister'} legacyBehavior>
+            <Link href={'/Client/ClientRegister'} legacyBehavior>
               ➡
             </Link>
               </Button>
@@ -31,8 +31,9 @@ export function MainItens() {
               seu cliente com sua marca.
             </span>
             <Button className={styles.buttonItems}>
-              
+            <Link href={'/Driver/DriverSignUp'} legacyBehavior>
               ➡
+            </Link>
               </Button>
           </div>
         </div>
