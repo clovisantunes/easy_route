@@ -107,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       toast.success('Usuario criado com sucesso')
 
-      Router.push('/#')
+      Router.push('/Client/Dashboard')
     } catch (err) {
       console.log("Erro ao cadatrar", err);
     }
@@ -134,7 +134,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       toast.success('Cadastrado com sucesso')
 
 
-      Router.push('/Dashboard')
+      Router.push('/Driver/Dashboard')
     } catch (err) {
       toast.error('Erro ao cadastrar')
       console.log("Erro ao cadastrar condutor", err);

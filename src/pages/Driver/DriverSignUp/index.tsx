@@ -52,7 +52,7 @@ export default function DriverSignUp() {
   useEffect(() => {
     const driveUser = localStorage.getItem("driverId");
     if (driveUser) {
-      Router.push("/dashboard");
+      Router.push("/Driver/Dashboard");
     }
   }, []);
 

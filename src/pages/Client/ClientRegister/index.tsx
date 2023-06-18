@@ -1,4 +1,5 @@
-import { useContext, FormEvent, useState } from "react";
+import { useContext, FormEvent, useState, useEffect } from "react";
+import Router from "next/router";
 import { Input } from "@/components/UI/Input";
 import styles from "./styles.module.scss";
 import Head from "next/head";
@@ -54,6 +55,13 @@ export default function ClientRegister() {
     await signUp(data);
     setLoading(false);
   }
+  
+  useEffect(() => {
+    const clientUser = localStorage.getItem("userId");
+    if (clientUser) {
+      Router.push("/Client/Dashboard");
+    }
+  }, []);
 
   return (
     <>
