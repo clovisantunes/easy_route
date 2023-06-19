@@ -72,7 +72,7 @@ export default function DriverSignUp() {
           <form onSubmit={handleSignUpDriver}>
             <div className={styles.inputWrapper}>
               <Input
-                placeholder="Digite o nome do cliente"
+                placeholder="Digite o nome do condutor"
                 type="text"
                 value={nome}
                 onChange={(e) => setnome(e.target.value)}

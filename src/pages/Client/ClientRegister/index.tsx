@@ -9,6 +9,7 @@ import { Navbar } from "@/components/Header";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { toast } from "react-toastify";
+
 export default function ClientRegister() {
   const { signUp } = useContext(AuthContext);
 

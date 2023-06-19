@@ -8,6 +8,9 @@ import { Input } from "@/components/UI/Input";
 import { Button } from "@/components/UI/Button/Index";
 import Router from "next/router";
 import { setupAPIClient } from "@/services/api";
+import { toast } from "react-toastify";
+import { handleSignOutClient } from "@/utils/Logout";
+
 
 export default function Dashboard() {
   const [nome, setNome] = useState("");
@@ -87,9 +90,9 @@ export default function Dashboard() {
       const response = await apiClient.put(`/Cliente/${userId}`, userData);
 
       if (response.status === 200) {
-        console.log("Dados atualizados com sucesso!");
+        toast.success("Dados atualizados com sucesso!");
       } else {
-        console.error("Ocorreu um erro ao atualizar os dados.");
+        toast.error("Ocorreu um erro ao atualizar os dados.");
       }
     } catch (error) {
       console.error("Ocorreu um erro ao enviar a requisição.", error);
@@ -110,13 +113,10 @@ export default function Dashboard() {
     );
   };
 
-  function handleSignOut(){
-    localStorage.removeItem('userId')
-    Router.push('/#')
-  }
+
 
   async function handleDeleteUser() {
-    const confirmed = window.confirm("Tem certeza que deseja deletar o usuário?");
+    const confirmed = window.confirm("Tem certeza que deseja deletar sua conta?");
   
     if (confirmed) {
       try {
@@ -126,9 +126,9 @@ export default function Dashboard() {
           data: { id: userId }
         });
         if (response.status === 200) {
-          console.log("Usuário deletado com sucesso!");
+          toast.success("Usuário deletado com sucesso!");
         } else {
-          console.error("Ocorreu um erro ao deletar o usuário.");
+          toast.error("Ocorreu um erro ao deletar o usuário.");
         }
       } catch (error) {
         console.error("Ocorreu um erro na requisição.", error);
@@ -148,8 +148,8 @@ export default function Dashboard() {
       <div className={styles.container}>
         <div className={styles.containerUser}>
           <div className={styles.topItems}>
-          <h1>Editar meu perfil</h1>
-          <Button type="submit" onClick={handleSignOut}>Sair</Button>
+          <h1>Editar perfil</h1>
+          <Button type="submit" onClick={handleSignOutClient}>Sair</Button>
           </div>
           <div className={styles.userImageContainer}>
             <div className={styles.userImage}>
@@ -171,8 +171,8 @@ export default function Dashboard() {
                     height={128}
                   />
                 )}
-                <span className={styles.textImage}>Alterar foto de perfil</span>
               </label>
+                <span className={styles.textImage}>Alterar foto de perfil</span>
             </div>
           </div>
           <div className={styles.items}>
