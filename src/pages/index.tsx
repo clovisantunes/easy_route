@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Easy Route - Cadastro de cliente</title>
+        <title>Easy Route - Seu sistema de gerenciar rotas</title>
       </Head>
       <Navbar />
       <div className={styles.containerCenter}>

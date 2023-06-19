@@ -146,9 +146,7 @@ export default function ClientRegister() {
             </div>
             <div className={styles.buttonWrapper}>
               <Button loading={loading}>
-                
                   Cadastrar
-          
               </Button>
             </div>
           </form>
