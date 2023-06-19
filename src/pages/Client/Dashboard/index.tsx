@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
 import { Navbar } from "@/components/Header";
 import Head from "next/head";
 import styles from "./styles.module.scss";
@@ -109,6 +110,35 @@ export default function Dashboard() {
     );
   };
 
+  function handleSignOut(){
+    localStorage.removeItem('userId')
+    Router.push('/#')
+  }
+
+  async function handleDeleteUser() {
+    const confirmed = window.confirm("Tem certeza que deseja deletar o usuário?");
+  
+    if (confirmed) {
+      try {
+        const userId = Number(localStorage.getItem("userId"));
+        const apiClient = setupAPIClient();
+        const response = await apiClient.delete(`/Cliente/${userId}`, {
+          data: { id: userId }
+        });
+        if (response.status === 200) {
+          console.log("Usuário deletado com sucesso!");
+        } else {
+          console.error("Ocorreu um erro ao deletar o usuário.");
+        }
+      } catch (error) {
+        console.error("Ocorreu um erro na requisição.", error);
+      }
+      localStorage.removeItem('userId')
+      Router.push('/#')
+    }
+
+  }
+  
   return (
     <>
       <Head>
@@ -117,7 +147,10 @@ export default function Dashboard() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.containerUser}>
+          <div className={styles.topItems}>
           <h1>Editar meu perfil</h1>
+          <Button type="submit" onClick={handleSignOut}>Sair</Button>
+          </div>
           <div className={styles.userImageContainer}>
             <div className={styles.userImage}>
               <label className={styles.labelAvatar}>
@@ -188,9 +221,16 @@ export default function Dashboard() {
                 />
               </div>
               <div className={styles.buttonWrapper}>
+                
                 <Button loading={loading}>Salvar</Button>
               </div>
             </form>
+            <Button 
+                className={styles.delete} 
+                loading={loading}
+                onClick={handleDeleteUser}
+                >Deletar Conta
+                </Button>
           </div>
         </div>
       </div>

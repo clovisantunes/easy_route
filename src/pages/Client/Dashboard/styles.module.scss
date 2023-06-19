@@ -22,6 +22,25 @@
     margin-bottom: .5em;
   }
 }
+.topItems{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  Button{
+      width: 5em;
+      height: 2em;
+      background-color: var(--red-900);
+      border-radius: .3em;
+      color: var(--white);
+      transition: all .3s ease;
+  }
+
+  Button:hover{
+    background-color: var(--dark-700);
+    color: var(--white);
+  }
+}
 .userImage {
   width: 12em;
   height: 8em;
@@ -48,7 +67,7 @@
     display: none;
   }
   span:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   img{
     border: solid 2px var(--blue-500);
@@ -97,9 +116,15 @@
     font-weight: bold;
     font-size: 1.5em;
     transition: all 0.3s ease;
+    margin: 0 2em;
   }
   Button:hover {
     background-color: var(--dark-700);
+    border: none;
+  }
+  .delete{
+    background-color: var(--red-900);
+    width: 8.5em;
     border: none;
   }
 }
