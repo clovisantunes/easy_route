@@ -9,6 +9,7 @@ import Router from "next/router";
 import { FaUserCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { handleSignOutDriver } from "@/utils/Logout";
+import Link from "next/link";
 
 
 export default function Dashboard() {
@@ -206,6 +207,14 @@ export default function Dashboard() {
                 >Deletar Conta
                 </Button>
         </div>
+        <Button
+        type="submit"
+        className={styles.nextPage}
+        >
+          <Link href={'/SelectClient'} legacyBehavior>
+          ➡
+          </Link>
+        </Button>
       </div>
     </>
   );

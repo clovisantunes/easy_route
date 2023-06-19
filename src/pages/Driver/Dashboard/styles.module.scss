@@ -5,6 +5,8 @@
     height: 100vh;
     padding: 1em;
     text-align: center;
+    flex-direction: column;
+    position: relative;
     form {  
       display: flex;
       flex-direction: column;
@@ -131,3 +133,20 @@
       margin-top: 0.5em;
     }
   }
+.nextPage{
+  width: 2em;
+  height: 2em;
+  border-radius: 100%;
+  border: none;
+  color: var(--white);
+  font-size: 2em;
+  background-color: var(--blue-500);
+  position: absolute;
+  right: 10%;
+  bottom: 6%;
+  transition: all .5s ease;
+
+}
+.nextPage:hover{
+    transform: scale(1.2);
+}
