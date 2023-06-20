@@ -8,12 +8,8 @@
     border-radius: 1em;
     padding: 1em;
 }
-.clientTop{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.clientContainer{
+
+.carContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +29,7 @@
         border: 3px solid var(--black);
       }
 
-    .clientList{
+    .carList{
         overflow: auto;
         height: 40vh;
        

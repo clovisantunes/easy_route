@@ -19,7 +19,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-
+        .itemClient{
+            display: flex;
+            flex-direction: column;
+            .buttonAddItem{
+                width: 3em;
+                border: none;
+                background-color: var(--red-900);
+                transition: all .3s ease;
+                margin-left: 1em;
+              }
+              .buttonAddClient:hover{
+                transform: scale(1.1);
+              }
+            }
+            
             Input{
                 width: 25em;
                 height: 2.5em;

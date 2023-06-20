@@ -11,6 +11,8 @@ type AuthContextData = {
   signOut: () => void;
   signUp: (credentials: SignUpProps) => Promise<void>;
   signUpDriver: (credentials: SignUpDriverProps) => Promise<void>;
+  GetClients: (credentials: getClientProps) => Promise<getClientProps[]>
+  GetCars: (Credentials: getCarProps) => Promise<getCarProps[]>
 };
 
 type UserProps = {
@@ -51,6 +53,28 @@ type SignUpDriverProps = {
   categoriaHabilitacao: string;
   vencimentoHabilitacao: string;
 };
+
+type getClientProps = {
+    id: number,
+    numeroDocumento: string,
+    tipoDocumento: string,
+    nome: string,
+    logradouro: string,
+    numero: string,
+    bairro: string,
+    cidade: string,
+    uf: string  
+}
+
+type getCarProps = {
+  id: number,
+  placa: string,
+  marcaModelo: string,
+  anoFabricacao: number,
+  kmAtual: number
+}
+
+
 
 export const AuthContext = createContext({} as AuthContextData);
 
@@ -106,8 +130,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem("userId", String(idUser));
 
       toast.success('Usuario criado com sucesso')
-
-      Router.push('/Client/Dashboard')
     } catch (err) {
       console.log("Erro ao cadatrar", err);
     }
@@ -140,12 +162,37 @@ export function AuthProvider({ children }: AuthProviderProps) {
       console.log("Erro ao cadastrar condutor", err);
     }
   }
+
  
 
+  async function GetClients(credentials: getClientProps): Promise<getClientProps[]> {
+    try {
+      const response = await api.get("/Cliente", {
+        params: credentials,
+      });
+      const clients = response.data as getClientProps[];
+      return clients;
+    } catch (err) {
+      console.log("Erro ao carregar clientes", err);
+      throw err;
+    }
+  }
+  async function GetCars(credentials: getCarProps): Promise<getCarProps[]> {
+    try {
+      const response = await api.get("/Veiculo", {
+        params: credentials,
+      });
+      const cars = response.data as getCarProps[];
+      return cars;
+    } catch (err) {
+      console.log("Erro ao carregar carros", err);
+      throw err;
+    }
+  }
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver }}
+      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars }}
     >
       {children}
     </AuthContext.Provider>
