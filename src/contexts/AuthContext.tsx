@@ -13,6 +13,7 @@ type AuthContextData = {
   signUpDriver: (credentials: SignUpDriverProps) => Promise<void>;
   GetClients: (credentials: getClientProps) => Promise<getClientProps[]>
   GetCars: (Credentials: getCarProps) => Promise<getCarProps[]>
+  CreateCar:(Credentials: createCarProps) => Promise<void>
 };
 
 type UserProps = {
@@ -45,6 +46,13 @@ type SignUpProps = {
   cidade: string;
   uf: string;
 };
+
+type createCarProps = {
+  placa: string;
+  marcaModelo: string;
+  anoFabricacao: number;
+  kmAtual: number;
+}
 // types do Driver
 
 type SignUpDriverProps = {
@@ -135,6 +143,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+
+  async function CreateCar({
+    placa,
+    marcaModelo,
+    anoFabricacao,
+    kmAtual
+  }: createCarProps) {
+    try{  
+      const response = await api.post("/Veiculo",{
+        placa,
+        marcaModelo,
+        anoFabricacao,
+        kmAtual
+      });
+      toast.success("veiculo criado com sucesso")
+
+    }catch(err){
+      console.log("Erro ao cadastrar veiculo", err)
+    }
+  }
+
   //Cadastro de Condutor
 
   async function signUpDriver({
@@ -192,7 +221,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars }}
+      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars, CreateCar }}
     >
       {children}
     </AuthContext.Provider>

@@ -11,7 +11,7 @@ interface ModalAddClientProps {
   onRequestClose: () => void;
 }
 
-export default function ModalAddClient({
+export default function  ModalAddClient({
   isOpen,
   onRequestClose,
 }: ModalAddClientProps) {
@@ -81,7 +81,7 @@ export default function ModalAddClient({
       <div className={styles.container}>
         <div className={styles.registerContainer}>
           <div className={styles.title}>
-            <h1>Cadastre-se como usuário</h1>
+            <h1>Cadastrar novo usuário</h1>
           </div>
           <form onSubmit={handleSignUp}>
             <div className={styles.inputWrapper}>

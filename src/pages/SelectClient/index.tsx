@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import { ModalClient } from "@/components/UI/ModalClient";
 import ModalAddClient from "@/components/UI/ModalAddClient";
 import ModalCar from "@/components/UI/ModalCar";
+import ModalAddCar from "@/components/UI/ModalAddCar";
 
 export default function SelectClient() {
   Modal.setAppElement("#__next");
@@ -16,9 +17,8 @@ export default function SelectClient() {
   const [selectedClient, setSelectedClient] = useState<any>(null);
   const [modalAddClientVisible, setmodalAddClientVisible] = useState(false);
   const [modalCarVisible, setModalCarVisible] = useState(false);
-  const [selectedCar, setSelectedCar ] = useState<any>(null);
-
-
+  const [selectedCar, setSelectedCar] = useState<any>(null);
+  const [modalAddCarVisible, setmodalAddCarVisible] = useState(false);
 
   const openModal = () => {
     setModalVisible(true);
@@ -37,17 +37,24 @@ export default function SelectClient() {
     closeModal();
   };
 
-  const openModalCar = () =>{
-    setModalCarVisible(true)
-  }
-  const closeModalCar = () =>{
-    setModalCarVisible(false)
-  }
- 
+  const openModalCar = () => {
+    setModalCarVisible(true);
+  };
+  const closeModalCar = () => {
+    setModalCarVisible(false);
+  };
+
   const handleSelectCar = (car: any) => {
-    setSelectedCar(car)
+    setSelectedCar(car);
     closeModalCar();
-  }
+  };
+
+  const openAddCarModal = () => {
+    setmodalAddCarVisible(true);
+  };
+  const closeAddCarModal = () => {
+    setmodalAddCarVisible(false);
+  };
 
 
   return (
@@ -62,39 +69,38 @@ export default function SelectClient() {
             <form>
               <div className={styles.itemClient}>
                 <div>
-                <Input
-                  type="text"
-                  placeholder="Selecione um cliente"
-                  value={selectedClient ? selectedClient.nome : ""}
-                  onClick={openModal}
-                />
-                <Button
-                  type="button"
-                  className={styles.buttonAddItem}
-                  onClick={openAddModal}
-                >
-                  +
-                </Button>
+                  <Input
+                    type="text"
+                    placeholder="Selecione um cliente"
+                    value={selectedClient ? selectedClient.nome : ""}
+                    onClick={openModal}
+                  />
+                  <Button
+                    type="button"
+                    className={styles.buttonAddItem}
+                    onClick={openAddModal}
+                  >
+                    +
+                  </Button>
                 </div>
-                {selectedClient &&(
-                <div>
-                
-                <Input
-                  type="text"
-                  placeholder="Selecione um veiculo"
-                  value={selectedClient ? selectedCar.marcaModelo : ""}
-                  onClick={openModalCar}
-                />
-            
-                <Button
-                  type="button"
-                  className={styles.buttonAddItem}
-                >
-                  +
-                </Button>
-                </div>
+                {selectedClient && (
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="Selecione um veiculo"
+                      value={selectedCar ? selectedCar.marcaModelo: ""}
+                      onClick={openModalCar}
+                    />
+
+                    <Button 
+                    type="button" 
+                    className={styles.buttonAddItem}
+                    onClick={openAddCarModal}
+                    >
+                      +
+                    </Button>
+                  </div>
                 )}
-               
               </div>
               <Button type="submit">Confirmar</Button>
             </form>
@@ -116,9 +122,15 @@ export default function SelectClient() {
 
         {modalCarVisible && (
           <ModalCar
-          isOpen={modalCarVisible}
-          onRequestClose={closeModalCar}
-          onSelectCar={handleSelectCar}
+            isOpen={modalCarVisible}
+            onRequestClose={closeModalCar}
+            onSelectCar={handleSelectCar}
+          />
+        )}
+        {modalAddCarVisible &&(
+          <ModalAddCar 
+          isOpen={modalAddCarVisible}
+          onRequestClose={closeAddCarModal}
           />
         )}
 

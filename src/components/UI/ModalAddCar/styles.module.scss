@@ -1,0 +1,52 @@
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-700);
+    padding: 1em;
+
+    .registerContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        Button{
+            width: 15em;
+            height: 2.5em;
+            border: none;
+            font-size: 1em;
+            font-weight: bold;
+            color: var(--white);
+            background-color: var(--blue-900);
+            transition: all .3s ease;
+            
+        }
+        Button:hover{
+            transform: scale(1.1);
+        }
+    }
+    .title{
+        h1{
+            color: var(--white);
+            margin-bottom: 1em;
+        }
+    }
+    .inputWrapper{
+        Input{
+            width: 15em;
+            height: 2.5em;
+            margin: .5em;
+            border-radius: .4em;
+            border: none;
+            padding: .5em;
+            background-color: var(--grey-50);
+            font-weight: bold;
+        }
+        
+    }
+}
