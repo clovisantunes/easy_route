@@ -1,62 +1,70 @@
-.container{
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.containerCenter {
+  width: 60%;
+  height: 40em;
+
+  .itens {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-.containerCenter{
-    width: 60%;
-    height: 40em;
-    
 
-    .itens{
+    height: 90%;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .itemClient {
         display: flex;
-        justify-content: center;
-        align-items: center;
-
-        height: 90%;
-        form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        .itemClient{
-            display: flex;
-            flex-direction: column;
-            .buttonAddItem{
-                width: 3em;
-                border: none;
-                background-color: var(--red-900);
-                transition: all .3s ease;
-                margin-left: 1em;
-              }
-              .buttonAddClient:hover{
-                transform: scale(1.1);
-              }
-            }
-            
-            Input{
-                width: 25em;
-                height: 2.5em;
-                border-radius: .5em;
-                border: none;
-                padding: 1em;
-                background-color: var(--white);
-                color: var(--grey-100);
-                margin-bottom: 1em;
-            }
-            Button{
-                width: 10em;
-                height: 2.5em;
-                border-radius: 0.5em;
-                border: solid 2px var(--blue-500);
-                background-color: var(--blue-500);
-                color: var(--white);
-                transition: all .3s ease;
-            }
-            Button:hover{
-                background-color: var(--dark-700);
-                border: none;
-            }
+        flex-direction: column;
+        .buttonAddItem {
+          width: 3em;
+          border: none;
+          background-color: var(--red-900);
+          transition: all 0.3s ease;
+          margin-left: 1em;
         }
+        .buttonAddItem:hover {
+          transform: scale(1.1);
+        }
+
+        .deleteIcon {
+          width: 3em;
+          margin-left: 1em;
+        }
+
+        .deleteIcon:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      Input {
+        width: 25em;
+        height: 2.5em;
+        border-radius: 0.5em;
+        border: none;
+        padding: 1em;
+        background-color: var(--white);
+        color: var(--grey-100);
+        margin-bottom: 1em;
+      }
+      Button {
+        width: 10em;
+        height: 2.5em;
+        border-radius: 0.5em;
+        border: solid 2px var(--blue-500);
+        background-color: var(--blue-500);
+        color: var(--white);
+        transition: all 0.3s ease;
+      }
+      Button:hover {
+        background-color: var(--dark-700);
+        border: none;
+      }
     }
+  }
 }

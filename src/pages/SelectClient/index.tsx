@@ -9,6 +9,9 @@ import { ModalClient } from "@/components/UI/ModalClient";
 import ModalAddClient from "@/components/UI/ModalAddClient";
 import ModalCar from "@/components/UI/ModalCar";
 import ModalAddCar from "@/components/UI/ModalAddCar";
+import { FaTrashAlt } from 'react-icons/fa'
+import { setupAPIClient } from "@/services/api";
+import { toast } from "react-toastify";
 
 export default function SelectClient() {
   Modal.setAppElement("#__next");
@@ -57,6 +60,44 @@ export default function SelectClient() {
   };
 
 
+  async function handleDeleteItem(identifier) {
+    const confirmed = window.confirm("Tem certeza que deseja deletar este item?");
+  
+    if (confirmed) {
+      try {
+        let id;
+        let endpoint;
+  
+        if (identifier === "carId") {
+          id = selectedCar.id;
+          endpoint = "/Veiculo";
+          setSelectedCar("")
+        } else if (identifier === "clientId") {
+          id = selectedClient.id;
+          endpoint = "/Cliente";
+          setSelectedClient("")
+        } else {
+          throw new Error("Parâmetro 'identifier' inválido");
+        }
+  
+        const apiClient = setupAPIClient();
+  
+        const response = await apiClient.delete(`${endpoint}/${id}`, {
+          data: { id: id },
+        });
+  
+        if (response.status === 200) {
+          toast.success("Item deletado com sucesso!");
+        } else {
+          toast.error("Ocorreu um erro ao excluir o item.");
+        }
+      } catch (err) {
+        console.log("Erro ao excluir.", err);
+      }
+    }
+  }
+  
+
   return (
     <>
       <Head>
@@ -82,6 +123,14 @@ export default function SelectClient() {
                   >
                     +
                   </Button>
+                  <Button 
+                  type='button' 
+                  className={styles.deleteIcon}
+                  onClick={() => handleDeleteItem("clientId")}
+                  
+                  >
+                    <FaTrashAlt />
+                    </Button>
                 </div>
                 {selectedClient && (
                   <div>
@@ -98,6 +147,13 @@ export default function SelectClient() {
                     onClick={openAddCarModal}
                     >
                       +
+                    </Button>
+                    <Button 
+                    type='button' 
+                    className={styles.deleteIcon}
+                    onClick={() => handleDeleteItem("carId")}
+                    >
+                      <FaTrashAlt />
                     </Button>
                   </div>
                 )}
