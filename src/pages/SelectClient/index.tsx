@@ -12,6 +12,7 @@ import ModalAddCar from "@/components/UI/ModalAddCar";
 import { FaTrashAlt } from 'react-icons/fa'
 import { setupAPIClient } from "@/services/api";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function SelectClient() {
   Modal.setAppElement("#__next");
@@ -22,6 +23,17 @@ export default function SelectClient() {
   const [modalCarVisible, setModalCarVisible] = useState(false);
   const [selectedCar, setSelectedCar] = useState<any>(null);
   const [modalAddCarVisible, setmodalAddCarVisible] = useState(false);
+
+
+  const saveClientIdToLocalStorage = (clientId) => {
+    localStorage.setItem("clientId", clientId);
+  };
+  
+
+  const saveCarIdToLocalStorage = (carId) => {
+    localStorage.setItem("carId", carId);
+  };
+  
 
   const openModal = () => {
     setModalVisible(true);
@@ -37,6 +49,7 @@ export default function SelectClient() {
   };
   const handleSelectClient = (client: any) => {
     setSelectedClient(client);
+    saveClientIdToLocalStorage(client.id);
     closeModal();
   };
 
@@ -49,6 +62,7 @@ export default function SelectClient() {
 
   const handleSelectCar = (car: any) => {
     setSelectedCar(car);
+    saveCarIdToLocalStorage(car.id);
     closeModalCar();
   };
 
@@ -158,7 +172,12 @@ export default function SelectClient() {
                   </div>
                 )}
               </div>
-              <Button type="submit">Confirmar</Button>
+              <Button 
+              type="button">
+              <Link href={`/Route?idCliente=${selectedClient?.id}&idVeiculo=${selectedCar?.id}`}>
+                Confirmar
+              </Link>
+              </Button>
             </form>
           </div>
         </div>

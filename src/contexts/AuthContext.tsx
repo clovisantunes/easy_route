@@ -14,6 +14,7 @@ type AuthContextData = {
   GetClients: (credentials: getClientProps) => Promise<getClientProps[]>
   GetCars: (Credentials: getCarProps) => Promise<getCarProps[]>
   CreateCar:(Credentials: createCarProps) => Promise<void>
+  Start:(Credentials: StartProps) => Promise<void>
 };
 
 type UserProps = {
@@ -73,7 +74,7 @@ type getClientProps = {
     cidade: string,
     uf: string  
 }
-
+// type Veiculos
 type getCarProps = {
   id: number,
   placa: string,
@@ -81,7 +82,18 @@ type getCarProps = {
   anoFabricacao: number,
   kmAtual: number
 }
+ // Type Deslocamento
 
+type StartProps= {
+  kmInicial: number,
+  inicioDeslocamento: string,
+  checkList: string,
+  motivo: string,
+  observacao: string,
+  idCondutor: number,
+  idVeiculo: number,
+  idCliente: number,
+}
 
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -98,7 +110,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 
 
-
+  // logar usuario
 
   async function signIn({ nome, numeroDocumento }: SignInProps) {
 
@@ -113,6 +125,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+
+  // criar cliente
   async function signUp({
     numeroDocumento,
     tipoDocumento,
@@ -143,7 +157,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-
+// criar veiculo
   async function CreateCar({
     placa,
     marcaModelo,
@@ -193,7 +207,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
  
-
+// Buscar clientes
   async function GetClients(credentials: getClientProps): Promise<getClientProps[]> {
     try {
       const response = await api.get("/Cliente", {
@@ -206,6 +220,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       throw err;
     }
   }
+
+  // Buscar veiculos
   async function GetCars(credentials: getCarProps): Promise<getCarProps[]> {
     try {
       const response = await api.get("/Veiculo", {
@@ -219,9 +235,39 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  // iniciar deslocamento 
+
+  async function Start({
+    kmInicial,
+    inicioDeslocamento,
+    checkList,
+    motivo,
+    observacao,
+    idCondutor,
+    idVeiculo,
+    idCliente
+  }: StartProps){
+    try{
+      const response = await api.post('/Deslocamento/IniciarDeslocamento', {
+    kmInicial,
+    inicioDeslocamento,
+    checkList,
+    motivo,
+    observacao,
+    idCondutor,
+    idVeiculo,
+    idCliente
+      });
+      toast.success("Deslocamento iniciado com sucesso")
+    }catch(err){
+      console.log('Erro ao iniciar', err)
+      toast.error("Erro ao iniciar")
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars, CreateCar }}
+      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars, CreateCar, Start }}
     >
       {children}
     </AuthContext.Provider>
