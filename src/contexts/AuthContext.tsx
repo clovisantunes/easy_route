@@ -15,7 +15,7 @@ type AuthContextData = {
   GetCars: (Credentials: getCarProps) => Promise<getCarProps[]>
   CreateCar:(Credentials: createCarProps) => Promise<void>
   Start:(Credentials: StartProps) => Promise<void>
-  getStart:(Credentials: StartProps) => Promise<StartProps[]>
+  getStart:(Credentials: GetStartProps) => Promise<GetStartProps[]>
 };
 
 type UserProps = {
@@ -86,6 +86,17 @@ type getCarProps = {
  // Type Deslocamento
 
 type StartProps= {
+  kmInicial: number,
+  inicioDeslocamento: string,
+  checkList: string,
+  motivo: string,
+  observacao: string,
+  idCondutor: number,
+  idVeiculo: number,
+  idCliente: number,
+}
+type GetStartProps= {
+  id: number,
   kmInicial: number,
   inicioDeslocamento: string,
   checkList: string,
@@ -268,12 +279,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Buscar deslocamento 
 
-  async function getStart(credentials: StartProps): Promise<StartProps[]>{
+  async function getStart(credentials: GetStartProps): Promise<GetStartProps[]>{
     try{
       const response = await api.get("/Deslocamento",{
         params: credentials,
       });
-      const starts = response.data as StartProps[];
+      const starts = response.data as GetStartProps[];
       return starts;
     }catch(err){
       console.log('Erro ao carregas deslocamentos', err)

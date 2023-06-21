@@ -8,6 +8,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
 import { Button } from "@/components/UI/Button/Index";
 import { api } from "@/services/apiClient";
+import { setupAPIClient } from "@/services/api";
 
 export default function Route() {
   const { Start, getStart } = useContext(AuthContext);
@@ -21,6 +22,7 @@ export default function Route() {
   const carId =
     typeof window !== "undefined" ? localStorage.getItem("carId") : null;
 
+  const [idRoute, setIdRoute ] = useState('');
   const [kmInicial, setKm] = useState("");
   const [inicioDeslocamento, setData] = useState("");
   const [checkList, setCheckList] = useState("");
@@ -31,6 +33,9 @@ export default function Route() {
   const [idVeiculo, setVeiculoID] = useState(carId);
   const [deslocamento, setDeslocamento] = useState<any[]>([]);
   const [selectedItem, setSelectedItem] = useState(null)
+  const addNewRoute = (route) => {
+    setDeslocamento((prevDeslocamento) => [...prevDeslocamento, route]);
+  };
 
   async function handleStart(event: FormEvent) {
     event.preventDefault();
@@ -44,7 +49,7 @@ export default function Route() {
       toast.error("Preencha todos os campos");
       return;
     }
-
+  
     let data = {
       kmInicial: parseInt(kmInicial),
       inicioDeslocamento,
@@ -55,14 +60,34 @@ export default function Route() {
       idVeiculo: parseInt(idVeiculo),
       idCliente: parseInt(idCliente),
     };
-    console.log(data);
+  
     await Start(data);
+  
+    try {
+      const response = await getStart({
+        id: 0,
+        kmInicial: 0,
+        inicioDeslocamento: "",
+        checkList: "",
+        motivo: "",
+        observacao: "",
+        idCondutor: 0,
+        idVeiculo: 0,
+        idCliente: 0,
+      });
+      setDeslocamento(response);
+    } catch (err) {
+      console.log("Erro ao carregar atendimentos", err);
+      toast.error("Erro ao carregar atendimentos!");
+    }
   }
+  
 
   useEffect(() => {
     async function fetchStarts() {
       try {
         const response = await getStart({
+          id: 0,
           kmInicial: 0,
           inicioDeslocamento: "",
           checkList: "",
@@ -83,6 +108,7 @@ export default function Route() {
 
   const updateFields = (selectedItem: any) => {
     if (selectedItem) {
+      setIdRoute(selectedItem.id)
       setKm(selectedItem.kmInicial.toString());
       setData(selectedItem.inicioDeslocamento);
       setCheckList(selectedItem.checkList);
@@ -92,27 +118,63 @@ export default function Route() {
       setVeiculoID(selectedItem.idVeiculo);
       setClientId(selectedItem.idCliente);
     } else {
+      setIdRoute("");
       setKm("");
       setData("");
       setCheckList("");
       setMotivo("");
       setObservacao("");
-      setDriverId("");
-      setVeiculoID("");
-      setClientId("");
+      setDriverId(driverId);
+      setVeiculoID(carId);
+      setClientId(clientId);
     }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     setSelectedItem(selectedValue);
-    console.log('ID', selectedItem)
   };
   useEffect(() => {
     const selectedItemData = deslocamento.find((start) => start.checkList === selectedItem);
     updateFields(selectedItemData);
   }, [selectedItem, deslocamento]);
   
+
+  const  handleCleanItens =() => {
+    setKm(""),
+      setData(""),
+      setCheckList(""),
+      setMotivo(""),
+      setObservacao(""),
+      setDriverId(""),
+      setVeiculoID(""),
+      setClientId("")
+  }
+
+  async function HandleDeleteRoute(){
+    const confirmed = window.confirm("Tem certeza que deseja deletar esta rota?");
+
+    if(confirmed){
+      try{
+        const apiClient = setupAPIClient();
+        const response = await apiClient.delete(`/Deslocamento/${idRoute}`,{
+          data: {id: idRoute}
+        });
+        if(response.status === 200){
+          toast.success("Rota deletada com sucesso!");
+          setSelectedItem('')
+          console.log(idRoute)
+        }else{
+          toast.error("Ocorreu um erro na requisição")
+        }
+      }catch(err){
+        console.log("Erro na requisição",err)
+        console.log(idRoute)
+      }
+    }
+  }
+
+
 
   return (
     <>
@@ -131,8 +193,8 @@ export default function Route() {
           >
             <option value="">Selecione um deslocamento ou crie um novo</option>
             {deslocamento.map((start, index) => (
-              <option key={`${start.checkList}-${index}`} value={start.checkList}>
-                {start.checkList} {start.motivo} {start.observacao}
+                <option key={`${start.id}-${start.checkList}-${index}`} value={start.checkList}>
+                {start.id} {start.checkList} {start.motivo} {start.observacao}
               </option>
             ))}
           </select>
@@ -242,10 +304,20 @@ export default function Route() {
               />
             </div>
           </div>
+          <div className={styles.buttonNext}>
           <Button type="submit" className={styles.buttonConfirm}>
             Iniciar
           </Button>
+          </div>
         </form>
+        <div className={styles.buttonExt}>
+          <Button type="button" className={styles.buttonConfirm} onClick={HandleDeleteRoute}>
+            Excluir
+          </Button>
+          <Button type="button" className={styles.buttonConfirm} onClick={handleCleanItens}>
+            Limpar
+          </Button>
+          </div>
       </div>
     </>
   );
