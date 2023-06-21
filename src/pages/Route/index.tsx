@@ -36,7 +36,7 @@ export default function Route() {
       inicioDeslocamento === "" ||
       checkList === "" ||
       motivo === "" ||
-      observacao === "" 
+      observacao === ""
     ) {
       toast.error("Preencha todos os campos");
       return;
@@ -52,7 +52,7 @@ export default function Route() {
       idVeiculo: parseInt(idVeiculo),
       idCliente: parseInt(idCliente),
     };
-    console.log(data)
+    console.log(data);
     await Start(data);
   }
 
@@ -64,40 +64,70 @@ export default function Route() {
       <Navbar />
       <div className={styles.container}>
         <form onSubmit={handleStart}>
-          <Input placeholder="Digite os Km inicais do veiculo" type="number" value={kmInicial}
-          onChange={(e) => setKm(e.target.value)}/>
-          <Input type="datetime-local" value={inicioDeslocamento} 
-          onChange={(e) => setData(e.target.value)}
-          />
-          <Input type="text" placeholder="Digite o checkList" value={checkList}
-           onChange={(e) => setCheckList(e.target.value)}
-          />
-          <Input type="text" placeholder="Digite o motivo da visita" value={motivo}
-           onChange={(e) => setMotivo(e.target.value)}
-          />
-          <Input type="text" placeholder="Observação" value={observacao}
-           onChange={(e) => setObservacao(e.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="idcondutor"
-            value={idCondutor}
-            disabled
-          />
-          <Input
-            type="number"
-            placeholder="idveiculo"
-            value={idVeiculo}
-            disabled
-          />
-          <Input
-            type="text"
-            placeholder="idClient"
-            value={idCliente}
-            disabled
-          />
-
-          <Button type="submit">Registrar</Button>
+          <div className={styles.containerInputs}>
+            <Input
+              className={styles.inputItems}
+              placeholder="Digite os Km inicais do veiculo"
+              type="number"
+              value={kmInicial}
+              onChange={(e) => setKm(e.target.value)}
+            />
+            <Input
+              className={styles.inputItems}
+              type="datetime-local"
+              value={inicioDeslocamento}
+              onChange={(e) => setData(e.target.value)}
+            />
+          </div>
+          <div className={styles.containerInputs}>
+            <Input
+              className={styles.inputItems}
+              type="text"
+              placeholder="Digite o checkList"
+              value={checkList}
+              onChange={(e) => setCheckList(e.target.value)}
+            />
+            <Input
+              className={styles.inputItems}
+              type="text"
+              placeholder="Digite o motivo da visita"
+              value={motivo}
+              onChange={(e) => setMotivo(e.target.value)}
+            />
+          </div>
+          <div className={styles.containerInputs}>
+            <Input
+              className={styles.inputItems}
+              type="text"
+              placeholder="Observação"
+              value={observacao}
+              onChange={(e) => setObservacao(e.target.value)}
+            />
+            <Input
+              className={`${styles.inputItems} ${styles.disabledInput}`}
+              type="text"
+              placeholder="idcondutor"
+              value={idCondutor}
+              disabled
+            />
+          </div>
+          <div className={styles.containerInputs}>
+            <Input
+              className={`${styles.inputItems} ${styles.disabledInput}`}
+              type="number"
+              placeholder="idveiculo"
+              value={idVeiculo}
+              disabled
+            />
+            <Input
+              className={`${styles.inputItems} ${styles.disabledInput}`}
+              type="text"
+              placeholder="idClient"
+              value={idCliente}
+              disabled
+            />
+          </div>
+          <Button type="submit" className={styles.buttonConfirm}>Iniciar</Button>
         </form>
       </div>
     </>

@@ -7,6 +7,38 @@
     form{
         display: flex;
         flex-direction: column;
-        
+        align-items: center;
     }
+    .containerInputs{
+        display: flex;
+        flex-direction: row;
+        width: 50em;
+        margin: .5em;
+    }
+    .inputItems{
+        width: 100%;
+        height: 2.5em;
+        padding: .5em;
+        margin-right: 1em;
+        border-radius: .3em;
+        border: none;
+        background-color: var(--white);
+        color: var(--grey-100);
+    }
+  .disabledInput{
+    background-color: var(--grey);
+    
+  }
+  .buttonConfirm{
+    width: 15em;
+    height: 2.5em;
+    background-color: var(--blue-500);
+    color: var(--white);
+    border: none;
+    border-radius: .5em;
+    transition: all .3s ease;
+  }
+  .buttonConfirm:hover{
+    transform: scale(1.1);
+  }
 }

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import { BsGeoAltFill } from "react-icons/bs";
-
 import Link from "next/link";
+
 export function Navbar() {
   return (
     <div className={styles.containerNav}>
       <div className={styles.navList}>
+        <Link href={'/#'}>
         <div className={styles.logo}>
           <BsGeoAltFill />
           <h1>Easy Route</h1>
         </div>
+          </Link>
 
         <div className={styles.items}>
           <ul>

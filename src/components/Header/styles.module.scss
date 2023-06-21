@@ -23,6 +23,7 @@
   text-align: center;
   color: var(--blue-500);
   border-bottom: solid 2px;
+  cursor: pointer;
   svg {
     width: 2.5em;
     height: 2em;
@@ -91,6 +92,7 @@
 }
 .client{
   background-color:var(--blue-100);
+  
 
 }
 .liClient{
@@ -98,7 +100,7 @@
   padding: .3em;
   font-size: 1.3em;
   font-weight: 300;
-  color: var(--blue-900);
+  color: var(--white);
   
 }
 .client:hover{
