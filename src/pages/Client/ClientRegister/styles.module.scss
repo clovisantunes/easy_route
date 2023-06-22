@@ -152,6 +152,17 @@
 }
 
 @media (max-width: 500px) {
+  .loginContainer{
+    h1{
+      font-size: 2em;
+    }
+    span{
+      font-size: 1.3em;
+    }
+    Button{
+      margin-bottom: 1em;
+    }
+  }
   .registerContainer {
     width: 90%;
    

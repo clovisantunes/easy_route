@@ -150,3 +150,31 @@
 .nextPage:hover{
     transform: scale(1.2);
 }
+@media (max-width: 1024px){
+  .registerContainer{
+    width: 80%;
+  }
+  .textTop{
+    width: 80%;
+  }
+  .inputWrapper{
+    Input{
+      width: 50%;
+    }
+  }
+}
+@media (max-width: 480px){
+  .registerContainer{
+    margin-top: 10em;
+  }
+    .inputWrapper{
+      flex-direction: column;
+      Input{
+        width: 100%;
+      }
+    }
+    .nextPage{
+      position: static;
+      margin-top: 1em;
+    }
+}

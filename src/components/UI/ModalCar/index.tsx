@@ -39,9 +39,9 @@ export default function ModalCar({ isOpen, onRequestClose, onSelectCar }: ModalC
     content: {
       top: '25%',
       bottom: 'auto',
-      left: '25%',
+      left: '10%',
       right: 'auto',
-      width: '50%',
+      width: '80%',
       height: '55vh',
       padding: '0',
       border: 'none',
@@ -50,7 +50,12 @@ export default function ModalCar({ isOpen, onRequestClose, onSelectCar }: ModalC
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
+    <Modal 
+    isOpen={isOpen} 
+    onRequestClose={onRequestClose} 
+    style={customStyles}
+    className={styles.Modal}
+    >
       <div className={styles.container}>
         <div className={styles.carContainer}>
           <span>Carros</span>

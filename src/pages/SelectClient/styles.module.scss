@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
 }
 .containerCenter {
   width: 60%;
@@ -12,15 +13,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     height: 90%;
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
       .itemClient {
         display: flex;
         flex-direction: column;
+        width: 100%;
         .buttonAddItem {
           width: 3em;
           border: none;
@@ -43,7 +45,7 @@
       }
 
       Input {
-        width: 25em;
+        width: 80%;
         height: 2.5em;
         border-radius: .5em;
         border: none;
@@ -66,5 +68,27 @@
         border: none;
       }
     }
+  }
+}
+@media (max-width: 1024px){
+  .container{
+    width: 90%;
+  }
+  .containerCenter{
+    width: 90%;
+  }
+}
+@media (max-width: 780px){
+  .containerCenter{
+    width: 95%;
+  }
+  .buttonForm{
+    max-width: 60%;
+  }
+  
+}
+@media (max-width: 480px){
+  .buttonForm{
+    max-width: 40%;
   }
 }

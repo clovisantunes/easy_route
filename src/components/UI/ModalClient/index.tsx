@@ -45,9 +45,9 @@ export function ModalClient( {isOpen, onRequestClose, onSelectClient}: ModalGetC
     content:{
         top: '25%',
         bottom: 'auto',
-        left: '25%',
+        left: '10%',
         right: 'auto',
-        width: '50%',
+        width: '80%',
         height: '55vh',
         padding: '0',
         border:'none',
@@ -60,6 +60,7 @@ export function ModalClient( {isOpen, onRequestClose, onSelectClient}: ModalGetC
     isOpen={isOpen}
     onRequestClose={onRequestClose}
     style={customStyles}
+    className={styles.Modal}
     >
     <div className={styles.container}>
       <div className={styles.clientContainer}>

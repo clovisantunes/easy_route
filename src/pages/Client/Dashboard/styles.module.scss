@@ -129,5 +129,13 @@
     width: 8.5em;
     border: none;
     margin-top: 1em;
+    
   }
+}
+
+@media (max-width: 500px) {
+  .containerUser{
+    width: 90%;
+  }
+  
 }

@@ -123,12 +123,13 @@ export default function SelectClient() {
           <div className={styles.itens}>
             <form>
               <div className={styles.itemClient}>
-                <div>
+                <div className={styles.buttonsModal}>
                   <Input
                     type="text"
                     placeholder="Selecione um cliente"
                     value={selectedClient ? selectedClient.nome : ""}
                     onClick={openModal}
+                    className={styles.buttonForm}
                   />
                   <Button
                     type="button"
@@ -153,6 +154,7 @@ export default function SelectClient() {
                       placeholder="Selecione um veiculo"
                       value={selectedCar ? selectedCar.marcaModelo: ""}
                       onClick={openModalCar}
+                      className={styles.buttonForm}
                     />
 
                     <Button 

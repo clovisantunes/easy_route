@@ -204,7 +204,7 @@ export default function Route() {
           <div className={styles.containerInputs}>
             <div className={styles.button}>
               <label htmlFor="kmInicial" className={styles.label}>
-                Km Iniciais do Veículo:
+                Km Iniciais:
               </label>
               <Input
                 className={styles.inputItems}

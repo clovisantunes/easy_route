@@ -50,3 +50,10 @@
         
     }
 }
+@media (max-width: 1024px){
+   .inputWrapper{
+    Input{
+        min-width: 90%;
+    }
+   }
+}
