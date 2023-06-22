@@ -3,11 +3,12 @@ import { Navbar } from "@/components/Header";
 import Head from "next/head";
 import styles from "./styles.module.scss";
 import { Input } from "@/components/UI/Input";
-import { useRouter } from "next/router";
+import  Router,{ useRouter } from "next/router";
 import { AuthContext } from "@/contexts/AuthContext";
 import { setupAPIClient } from "@/services/api";
 import { Button } from "@/components/UI/Button/Index";
 import MapPage from "@/components/Map";
+import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Dashboard() {
   const [idRoute, setIdRoute] = useState("");
   const [fimDeslocamento, setFimDeslocamento] = useState("");
   const [observacao, setObservacao] = useState("");
+  const [kmFinal, setKmFinal ] = useState('');
 
   const [nome, setNome] = useState("");
   const [logradouro, setLogradouro] = useState("");
@@ -54,6 +56,35 @@ export default function Dashboard() {
     if (idRoute) setIdRoute(idRoute.toString());
   });
 
+
+async function handleSetRouter(id, kmFinal, fimDeslocamento, observacao){
+  try{
+    const apiClient = setupAPIClient();
+    const RouterId = idRoute;
+
+    const routeData = {
+      id: RouterId,
+      kmFinal,
+      fimDeslocamento,
+      observacao
+    };
+    const response = await apiClient.put(`/Deslocamento/${RouterId}/EncerrarDeslocamento`, routeData)
+    if (response.status === 200){
+      toast.success("Finalizado com sucesso")
+      Router.push('/SelectClient')
+    }else{
+      toast.error("Erro ao finalziar.")
+    }
+  }catch(err){
+    console.log("Erro ao finalizar", err)
+  }
+}
+
+function handleClick() {
+  handleSetRouter(idRoute, kmFinal, fimDeslocamento, observacao);
+  
+}
+
   return (
     <>
       <Head>
@@ -62,6 +93,7 @@ export default function Dashboard() {
       <Navbar />
       <main className={styles.mainContainer}>
         <div className={styles.navLeft}>
+          <form>
           <Input type="text" value={idVeiculo} disabled />
           <Input type="text" value={idCliente} disabled />
           <Input type="text" value={idCondutor} disabled />
@@ -76,13 +108,19 @@ export default function Dashboard() {
             value={fimDeslocamento}
             onChange={(e) => setFimDeslocamento(e.target.value)}
           />
+          <Input
+            type="number"
+            value={kmFinal}
+            onChange={(e) => setKmFinal(e.target.value)}
+          />
           <textarea
             value={observacao}
             onChange={(e) => setObservacao(e.target.value)}
           />
           <div>
-            <Button type="button">Finalizar</Button>
+            <Button type="button" onClick={handleClick}>Finalizar</Button>
           </div>
+          </form>
         </div>
         <div className={styles.mapContainer}>
           <MapPage />
