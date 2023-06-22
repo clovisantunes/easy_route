@@ -233,6 +233,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+
+
+
+
+
   // Buscar veiculos
   async function GetCars(credentials: getCarProps): Promise<getCarProps[]> {
     try {

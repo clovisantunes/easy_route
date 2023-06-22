@@ -176,7 +176,7 @@ export default function SelectClient() {
               </div>
               <Button 
               type="button">
-              <Link href={`/Route?idCliente=${selectedClient?.id}&idVeiculo=${selectedCar?.id}`}>
+              <Link href={`/Route/RouteStart/?idCliente=${selectedClient?.id}&idVeiculo=${selectedCar?.id}`}>
                 Confirmar
               </Link>
               </Button>

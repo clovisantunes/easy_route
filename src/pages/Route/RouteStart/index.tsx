@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { Button } from "@/components/UI/Button/Index";
 import { api } from "@/services/apiClient";
 import { setupAPIClient } from "@/services/api";
+import Link from "next/link";
 
 export default function Route() {
   const { Start, getStart } = useContext(AuthContext);
@@ -306,8 +307,11 @@ export default function Route() {
           </div>
           <div className={styles.buttonNext}>
           <Button type="submit" className={styles.buttonConfirm}>
-            Iniciar
-          </Button>
+         
+          <Link href={`/Route/Dashboard/?idVeiculo=${idVeiculo}&idCliente=${idCliente}&idCondutor=${idCondutor}&idRoute=${idRoute}`}>
+                Iniciar
+              </Link>
+              </Button>
           </div>
         </form>
         <div className={styles.buttonExt}>
