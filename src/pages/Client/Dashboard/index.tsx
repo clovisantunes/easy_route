@@ -46,7 +46,7 @@ export default function Dashboard() {
       const response = await apiClient.get(`/Cliente/${userId}`);
 
       const { nome, logradouro, numero, bairro, cidade, uf } = response.data;
-
+      
       setNome(nome);
       setLogradouro(logradouro);
       setNumero(numero);
@@ -61,7 +61,7 @@ export default function Dashboard() {
     } else {
       fetchData();
     }
-  }, []);
+  }, []); 
 
   async function setUserData(
     nome,

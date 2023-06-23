@@ -1,6 +1,6 @@
 .mainContainer{
     width: 100%;
-    height: 100vh;
+    height: 100%;
 
     display: flex;
     flex-direction: row;
@@ -10,11 +10,59 @@
         flex-direction: column;
         align-items: center;
         width: 25%;
-        height: 100vh;
-        padding-top: 7%;
+        height: 100%;
+        padding-top: 5%;
         
+        
+        .buttonExpanded{
+            position: relative;
+            width: 90%; 
+            height: 8vh; 
+            margin-bottom: 1em; 
+            background: none;
+            border-bottom: 1px solid var(--grey-50);
+            svg{
+            position: absolute;
+            right: 5%;
+            }
+        }
+        .RouteCard{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70%;
+            height: 0vh;
+            overflow: hidden;
+            transition: all 5s ease;
+            
+        }
+        .expandedRoute{
+            height: 100%;
+        }
+        .ClientCard{
+            height: 0vh;
+            width: 70%;
+            overflow: hidden;
+            transition: all 5s ease;
+        }
+        .expandedClient{
+            height: 100%;
+        }
+        .DriverCard{
+            height: 0vh;
+            width: 70%;
+            overflow: hidden;
+            transition: all 5s ease;
+        }
+        .expandedDriver{
+            height: 100%;
+        }
+        label{
+            width: 100%;
+            color: var(--white);
+        }
         Input{
-            width: 80%;
+            width: 100%;
             height: 2.5em;
             padding: .5em;
             font-weight: bold;
@@ -23,7 +71,7 @@
             border: none;
         }
         textarea{
-            width: 80%;
+            width: 100%;
             height: 8em;
             margin: .5em 0;
             resize: none;
@@ -47,6 +95,6 @@
 }
 .mapContainer{
     width: 70%;
-    height: 95%;
+    height: 100vh;
     
 }
