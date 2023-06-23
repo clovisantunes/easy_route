@@ -16,6 +16,7 @@ type AuthContextData = {
   CreateCar:(Credentials: createCarProps) => Promise<void>
   Start:(Credentials: StartProps) => Promise<void>
   getStart:(Credentials: GetStartProps) => Promise<GetStartProps[]>
+  getWeatherForecast:(Credentials: getWeatherForecastProps) => Promise<getWeatherForecastProps[]>
 };
 
 type UserProps = {
@@ -105,6 +106,12 @@ type GetStartProps= {
   idCondutor: number,
   idVeiculo: number,
   idCliente: number,
+}
+type getWeatherForecastProps = {
+  data: string,
+  temperatureC: number,
+  temperatureF: number,
+  summary: string
 }
 
 
@@ -233,11 +240,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-
-
-
-
-
   // Buscar veiculos
   async function GetCars(credentials: getCarProps): Promise<getCarProps[]> {
     try {
@@ -296,9 +298,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  // Buscar clima
+
+  async function getWeatherForecast(credentials: getWeatherForecastProps): Promise<getWeatherForecastProps[]>{
+    try{
+      const response = await api.get('/WeatherForecast',{
+        params: credentials,
+      });
+      const weather = response.data as getWeatherForecastProps[];
+      return weather;
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars, CreateCar, Start, getStart }}
+      value={{ user, isAuthenticated, signIn, signOut, signUp, signUpDriver, GetClients, GetCars, CreateCar, Start, getStart, getWeatherForecast }}
     >
       {children}
     </AuthContext.Provider>

@@ -57,6 +57,15 @@
         .expandedDriver{
             height: 100%;
         }
+        .carCard{
+            height: 0vh;
+            width: 70%;
+            overflow: hidden;
+            transition: all 5s ease;
+        }
+        .expandedCar{
+            height: 100%;
+        }
         label{
             width: 100%;
             color: var(--white);
@@ -71,13 +80,14 @@
             border: none;
         }
         textarea{
-            width: 100%;
+            width: 90%;
             height: 8em;
             margin: .5em 0;
             resize: none;
             border-radius: .5em;
             border: none;
             padding: 1em;
+          
         }
         Button{
             width: 10em;
@@ -91,10 +101,22 @@
         Button:hover{
             transform: scale(1.1);
         }
+        .textArea{
+            label{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+       
     }
 }
 .mapContainer{
     width: 70%;
     height: 100vh;
     
+}
+.weather{
+    color: var(--white);
+    margin-top: 5em;
 }

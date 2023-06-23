@@ -13,6 +13,8 @@ import { FaAngleDown } from "react-icons/fa";
 
 export default function Dashboard() {
   const router = useRouter();
+  const apiClient = setupAPIClient();
+  const {getWeatherForecast} = useContext(AuthContext);
   const [idCondutor, setDriverId] = useState("");
   const [idCliente, setClientId] = useState("");
   const [idVeiculo, setVeiculoId] = useState("");
@@ -44,9 +46,26 @@ export default function Dashboard() {
     uf: ""
   });
 
+  const [weather, setWeather] = useState({
+    data:"",
+    temperatureC: "",
+    temperatureF: "",
+    summary: ""
+});
+
+
+  const [veiculoInfo, setVeiculoInfo] = useState({
+    placa: "",
+    marcaModelo: "",
+    anoFabricacao: "",
+    kmAtual: ""
+
+  })
+
   const [expanded, setExpanded] = useState(false);
   const [expandedClient, setExpandedClient] = useState(false);
   const [expandedDriver, setExpandedDriver] = useState(false);
+  const [expandedCar, setExpandedCar] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +104,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiClient = setupAPIClient();
+      
       const driverId = idCondutor;
 
       const response = await apiClient.get(`/Condutor/${driverId}`);
@@ -109,6 +128,33 @@ export default function Dashboard() {
 
     fetchData();
   }, [idCondutor]);
+
+  useEffect(() =>{
+    const fetchDataCar = async () => {
+        const veiculoId = idVeiculo;
+
+        const response = await apiClient.get(`/Veiculo/${veiculoId}`);
+
+        const {
+          id,
+          placa,
+          marcaModelo,
+          anoFabricacao,
+          kmAtual
+        } = response.data;
+
+        setVeiculoInfo((prevCarInfo) =>({
+          ...prevCarInfo,
+          placa: placa,
+          marcaModelo: marcaModelo,
+          anoFabricacao: anoFabricacao,
+          kmAtual: kmAtual
+        }));
+    };
+    fetchDataCar();
+  }, [idVeiculo]);
+
+
 
   async function handleSetRouter(id, kmFinal, fimDeslocamento, observacao) {
     try {
@@ -136,6 +182,37 @@ export default function Dashboard() {
     }
   }
 
+  useEffect(() => {
+    async function fetchWeather() {
+      try {
+        const response = await getWeatherForecast({
+          data: "",
+          temperatureC: 0,
+          temperatureF: 0,
+          summary: ""
+        });
+  
+        const weatherData = response[0]; // Acessar o primeiro elemento do array
+        const { temperatureC, temperatureF } = weatherData; // Extrair as propriedades temperatureC e temperatureF
+  
+        const weatherInfo = {
+          data: weatherData.data,
+          temperatureC: temperatureC.toString(), // Converter para string
+          temperatureF: temperatureF.toString(), // Converter para string
+          summary: weatherData.summary
+        };
+  
+        setWeather(weatherInfo);
+        console.log(weatherInfo);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  
+    fetchWeather();
+  }, []);
+  
+
   function handleClick() {
     handleSetRouter(idRoute, kmFinal, fimDeslocamento, observacao);
   }
@@ -150,6 +227,9 @@ export default function Dashboard() {
 
   function handleOpenCardDriver() {
     setExpandedDriver((prevExpandedDriver) => !prevExpandedDriver);
+  }
+  function handleOpenCardCar() {
+    setExpandedCar((prevExpandedCar) => !prevExpandedCar);
   }
 
   return (
@@ -196,18 +276,7 @@ export default function Dashboard() {
                   onChange={(e) => setKmFinal(e.target.value)}
                 />
               </label>
-              <label htmlFor="observacao">
-                Observação
-                <textarea
-                  value={observacao}
-                  onChange={(e) => setObservacao(e.target.value)}
-                />
-              </label>
-              <div>
-                <Button type="button" onClick={handleClick}>
-                  Finalizar
-                </Button>
-              </div>
+              
             </form>
           </div>
 
@@ -255,6 +324,45 @@ export default function Dashboard() {
               ))}
             </form>
           </div>
+          <Button
+            type="button"
+            className={styles.buttonExpanded}
+            onClick={handleOpenCardCar}
+          >
+            Informações do Veiculo
+            <FaAngleDown />
+          </Button>
+          <div
+            className={`${styles.carCard} ${
+              expandedCar ? styles.expandedCar : ""
+            }`}
+          >
+            <form>
+              {Object.entries(veiculoInfo).map(([key, value]) => (
+                <label key={key} htmlFor={key}>
+                  {key.charAt(0).toUpperCase() + key.slice(1)}:
+                  <Input type="text" value={value} disabled />
+                </label>
+              ))}
+            </form>
+          </div>
+          <div className={styles.textArea}>
+          <label htmlFor="observacao" >
+                Observação
+                <textarea
+                  value={observacao}
+                  onChange={(e) => setObservacao(e.target.value)}
+                />
+              </label>
+              </div>
+              <div>
+                <Button type="button" onClick={handleClick}>
+                  Finalizar
+                </Button>
+              </div>
+              <div className={styles.weather}>
+                <h3>{weather.data} {weather.temperatureC} {weather.temperatureF} {weather.summary}</h3>
+              </div>
         </div>
         <div className={styles.mapContainer}>
           <MapPage />
