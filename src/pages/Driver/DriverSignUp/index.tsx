@@ -1,5 +1,5 @@
-import { useEffect} from 'react';
-import Router from 'next/router';
+import { useEffect } from "react";
+import Router from "next/router";
 import { useState, FormEvent, useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Navbar } from "@/components/Header";
@@ -10,16 +10,12 @@ import Link from "next/link";
 import { Input } from "@/components/UI/Input";
 import { toast } from "react-toastify";
 
-
-
 export default function DriverSignUp() {
   const { signUpDriver } = useContext(AuthContext);
-
   const [nome, setnome] = useState("");
   const [numeroHabilitacao, setNumeroHabilitacao] = useState("");
   const [categoriaHabilitacao, setCategoriaHabilitacao] = useState("");
   const [vencimentoHabilitacao, setVencimentoHabilitacao] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   async function handleSignUpDriver(event: FormEvent) {
@@ -32,9 +28,7 @@ export default function DriverSignUp() {
       toast.error("Preencha todos os campos");
       return;
     }
-    setLoading(true)
-
-
+    setLoading(true);
     let data = {
       nome,
       numeroHabilitacao,
@@ -42,20 +36,15 @@ export default function DriverSignUp() {
       vencimentoHabilitacao,
     };
     await signUpDriver(data);
-    
-
     setLoading(false);
     return;
   }
-
-
   useEffect(() => {
     const driveUser = localStorage.getItem("driverId");
     if (driveUser) {
       Router.push("/Driver/Dashboard");
     }
   }, []);
-
 
   return (
     <>
@@ -84,7 +73,6 @@ export default function DriverSignUp() {
                 onChange={(e) => setNumeroHabilitacao(e.target.value)}
               />
             </div>
-
             <div className={styles.inputWrapper}>
               <Input
                 placeholder="Categoria da habilitação"
@@ -101,9 +89,7 @@ export default function DriverSignUp() {
             </div>
             <div className={styles.buttonWrapper}>
               <Button type="submit" loading={loading}>
-              
-                     Cadastrar
-                
+                Cadastrar
               </Button>
             </div>
           </form>

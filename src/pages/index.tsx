@@ -1,11 +1,12 @@
+import React from "react";
 import Head from "next/head";
-import styles from "../styles/home.module.scss";
-import { Navbar } from "@/components/Header";
 import Image from "next/image";
-import imgBanner from "../img/Suporte-Tecnico-em-TI.jpg";
 import { BsGeoAltFill } from "react-icons/bs";
+import { Navbar } from "@/components/Header";
 import { Button } from "@/components/UI/Button/Index";
 import { MainItens } from "@/components/MainItens/Index";
+import styles from "../styles/home.module.scss";
+import imgBanner from "../img/Suporte-Tecnico-em-TI.jpg";
 
 export default function Home() {
   return (

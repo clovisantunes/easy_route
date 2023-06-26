@@ -61,7 +61,7 @@ export default function ModalAddCar({
     await CreateCar(data);
 
     setLoading(false);
-    onRequestClose(); // Chama a função para fechar o modal
+    onRequestClose();
   };
 
   return (

@@ -1,16 +1,15 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
-import { Navbar } from "@/components/Header";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import Router from "next/router";
 import Head from "next/head";
-import styles from "./styles.module.scss";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { FaUserCircle } from "react-icons/fa";
+import { Navbar } from "@/components/Header";
 import { Input } from "@/components/UI/Input";
 import { Button } from "@/components/UI/Button/Index";
-import Router from "next/router";
 import { setupAPIClient } from "@/services/api";
-import { toast } from "react-toastify";
 import { handleSignOutClient } from "@/utils/Logout";
-
+import styles from "./styles.module.scss";
 
 export default function Dashboard() {
   const [nome, setNome] = useState("");
@@ -38,15 +37,12 @@ export default function Dashboard() {
       setAvatarUrl(imageUrl);
     }
   }
-
   useEffect(() => {
     const fetchData = async () => {
       const apiClient = setupAPIClient();
       const userId = localStorage.getItem("userId");
       const response = await apiClient.get(`/Cliente/${userId}`);
-
       const { nome, logradouro, numero, bairro, cidade, uf } = response.data;
-      
       setNome(nome);
       setLogradouro(logradouro);
       setNumero(numero);
@@ -54,29 +50,18 @@ export default function Dashboard() {
       setCidade(cidade);
       setUf(uf);
     };
-
     const clientUser = localStorage.getItem("userId");
     if (!clientUser) {
       Router.push("/Client/ClientRegister");
     } else {
       fetchData();
     }
-  }, []); 
-
-  async function setUserData(
-    nome,
-    logradouro,
-    numero,
-    bairro,
-    cidade,
-    uf
-  ) {
+  }, []);
+  async function setUserData(nome, logradouro, numero, bairro, cidade, uf) {
     try {
       setLoading(true);
-
       const apiClient = setupAPIClient();
       const userId = Number(localStorage.getItem("userId"));
-
       const userData = {
         id: userId,
         nome,
@@ -84,11 +69,9 @@ export default function Dashboard() {
         numero,
         bairro,
         cidade,
-        uf
+        uf,
       };
-
       const response = await apiClient.put(`/Cliente/${userId}`, userData);
-
       if (response.status === 200) {
         toast.success("Dados atualizados com sucesso!");
       } else {
@@ -100,30 +83,21 @@ export default function Dashboard() {
       setLoading(false);
     }
   }
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await setUserData(
-      nome,
-      logradouro,
-      numero,
-      bairro,
-      cidade,
-      uf
-    );
+    await setUserData(nome, logradouro, numero, bairro, cidade, uf);
   };
-
-
-
   async function handleDeleteUser() {
-    const confirmed = window.confirm("Tem certeza que deseja deletar sua conta?");
-  
+    const confirmed = window.confirm(
+      "Tem certeza que deseja deletar sua conta?"
+    );
+
     if (confirmed) {
       try {
         const userId = Number(localStorage.getItem("userId"));
         const apiClient = setupAPIClient();
         const response = await apiClient.delete(`/Cliente/${userId}`, {
-          data: { id: userId }
+          data: { id: userId },
         });
         if (response.status === 200) {
           toast.success("Usuário deletado com sucesso!");
@@ -133,12 +107,11 @@ export default function Dashboard() {
       } catch (error) {
         console.error("Ocorreu um erro na requisição.", error);
       }
-      localStorage.removeItem('userId')
-      Router.push('/#')
+      localStorage.removeItem("userId");
+      Router.push("/#");
     }
-
   }
-  
+
   return (
     <>
       <Head>
@@ -148,8 +121,10 @@ export default function Dashboard() {
       <div className={styles.container}>
         <div className={styles.containerUser}>
           <div className={styles.topItems}>
-          <h1>Editar perfil</h1>
-          <Button type="submit" onClick={handleSignOutClient}>Sair</Button>
+            <h1>Editar perfil</h1>
+            <Button type="submit" onClick={handleSignOutClient}>
+              Sair
+            </Button>
           </div>
           <div className={styles.userImageContainer}>
             <div className={styles.userImage}>
@@ -172,7 +147,7 @@ export default function Dashboard() {
                   />
                 )}
               </label>
-                <span className={styles.textImage}>Alterar foto de perfil</span>
+              <span className={styles.textImage}>Alterar foto de perfil</span>
             </div>
           </div>
           <div className={styles.items}>
@@ -221,16 +196,16 @@ export default function Dashboard() {
                 />
               </div>
               <div className={styles.buttonWrapper}>
-                
                 <Button loading={loading}>Salvar</Button>
               </div>
             </form>
-            <Button 
-                className={styles.delete} 
-                loading={loading}
-                onClick={handleDeleteUser}
-                >Deletar Conta
-                </Button>
+            <Button
+              className={styles.delete}
+              loading={loading}
+              onClick={handleDeleteUser}
+            >
+              Deletar Conta
+            </Button>
           </div>
         </div>
       </div>

@@ -1,17 +1,16 @@
 import React, { useContext, useState, FormEvent } from "react";
 import Modal from "react-modal";
+import { AuthContext } from "@/contexts/AuthContext";
 import styles from "./styles.module.scss";
 import { toast } from "react-toastify";
-import { AuthContext } from "@/contexts/AuthContext";
 import { Input } from "../Input";
-import { Router } from "next/router";
 
 interface ModalAddClientProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-export default function  ModalAddClient({
+export default function ModalAddClient({
   isOpen,
   onRequestClose,
 }: ModalAddClientProps) {
@@ -73,7 +72,7 @@ export default function  ModalAddClient({
     };
     await signUp(data);
     setLoading(false);
-    onRequestClose()
+    onRequestClose();
   }
 
   return (
@@ -142,7 +141,7 @@ export default function  ModalAddClient({
                 onChange={(e) => setUf(e.target.value)}
               />
             </div>
-            <button type="submit" >Cadastrar</button>
+            <button type="submit">Cadastrar</button>
           </form>
         </div>
       </div>

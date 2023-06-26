@@ -1,18 +1,17 @@
-import { useContext, FormEvent, useState, useEffect } from "react";
+import React, { useContext, FormEvent, useState, useEffect } from "react";
 import Router from "next/router";
-import { Input } from "@/components/UI/Input";
-import styles from "./styles.module.scss";
 import Head from "next/head";
-import { BsGeoAltFill } from "react-icons/bs";
-import { Button } from "@/components/UI/Button/Index";
-import { Navbar } from "@/components/Header";
-import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { BsGeoAltFill } from "react-icons/bs";
+import { AuthContext } from "@/contexts/AuthContext";
+import { Input } from "@/components/UI/Input";
+import { Button } from "@/components/UI/Button/Index";
+import { Navbar } from "@/components/Header";
+import styles from "./styles.module.scss";
 
 export default function ClientRegister() {
   const { signUp } = useContext(AuthContext);
-
   const [nome, setnome] = useState("");
   const [numeroDocumento, setNumeroDocumento] = useState("");
   const [tipoDocumento, setTipoDocumento] = useState("");
@@ -21,12 +20,9 @@ export default function ClientRegister() {
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
-
   const [loading, setLoading] = useState(false);
-
   async function handleSignUp(event: FormEvent) {
     event.preventDefault();
-
     if (
       nome === "" ||
       numeroDocumento === "" ||
@@ -40,9 +36,7 @@ export default function ClientRegister() {
       toast.error("Preencha todos os campos");
       return;
     }
-
     setLoading(true);
-
     let data = {
       nome,
       numeroDocumento,
@@ -57,7 +51,6 @@ export default function ClientRegister() {
     setLoading(false);
     Router.push("/Client/Dashboard");
   }
-  
   useEffect(() => {
     const clientUser = localStorage.getItem("userId");
     if (clientUser) {
@@ -75,7 +68,6 @@ export default function ClientRegister() {
         <div className={styles.loginContainer}>
           <h1>Bem-Vindo</h1>
           <span>Acesse sua conta agora mesmo</span>
-
           <Button>
             <Link href={"/Client/ClientSignIn"} legacyBehavior>
               Entrar

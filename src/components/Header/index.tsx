@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./styles.module.scss";
 import { BsGeoAltFill } from "react-icons/bs";
-import Link from "next/link";
 
 export function Navbar() {
   return (

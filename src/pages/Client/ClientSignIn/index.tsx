@@ -1,32 +1,28 @@
-import { useContext, FormEvent, useState } from "react";
-import { Input } from "@/components/UI/Input";
-import styles from "./styles.module.scss";
+import React, { useContext, FormEvent, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { BsGeoAltFill } from "react-icons/bs";
+import { AuthContext } from "@/contexts/AuthContext";
+import { Input } from "@/components/UI/Input";
 import { Button } from "@/components/UI/Button/Index";
 import { Navbar } from "@/components/Header";
-import Link from "next/link";
-import { AuthContext } from "@/contexts/AuthContext";
+import styles from "./styles.module.scss";
+
 
 export default function ClientSignIn() {
   const { signIn } = useContext(AuthContext);
-
   const [nome, setnome] = useState("");
   const [numeroDocumento, setNumeroDocumento] = useState("");
-
   const [loading, setLoading] = useState(false);
-
+  
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
-
     try {
       setLoading(true);
-
       const data = {
         nome,
         numeroDocumento,
       };
-
       await signIn(data);
       setLoading(false)
       const user = {
@@ -34,13 +30,13 @@ export default function ClientSignIn() {
         numeroDocumento,
       };
       localStorage.setItem("user", JSON.stringify(user));
-
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log("Ocorreu um erro no login:", error);
     }
   }
+
   return (
     <>
       <Head>
@@ -48,7 +44,7 @@ export default function ClientSignIn() {
       </Head>
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.registerContainer}>
+        <div className={styles.loginContainer}>
           <div className={styles.containerLeft}></div>
           <div className={styles.logo}>
             <BsGeoAltFill />

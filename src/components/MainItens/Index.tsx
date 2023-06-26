@@ -1,7 +1,8 @@
-import { Button } from "../UI/Button/Index";
-import styles from "./styles.module.scss";
-import { BsFillPersonFill, BsCarFrontFill } from "react-icons/bs";
+import React from "react";
 import Link from "next/link";
+import styles from "./styles.module.scss";
+import { Button } from "../UI/Button/Index";
+import { BsFillPersonFill, BsCarFrontFill } from "react-icons/bs";
 export function MainItens() {
   return (
     <div className={styles.container}>
@@ -30,11 +31,11 @@ export function MainItens() {
               Torne rápida e inesquecível a experiência do primeiro contato de
               seu cliente com sua marca.
             </span>
-            <Button className={styles.buttonItems}>
             <Link href={'/Driver/DriverSignUp'} legacyBehavior>
+            <Button className={styles.buttonItems}>
               ➡
-            </Link>
               </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -61,7 +61,6 @@ export default function Dashboard() {
     kmAtual: ""
 
   })
-
   const [expanded, setExpanded] = useState(false);
   const [expandedClient, setExpandedClient] = useState(false);
   const [expandedDriver, setExpandedDriver] = useState(false);
@@ -93,7 +92,6 @@ export default function Dashboard() {
   
     fetchData();
   }, [idCliente]);
-
   useEffect(() => {
     const { idVeiculo, idCliente, idCondutor, idRoute } = router.query;
     if (idVeiculo) setVeiculoId(idVeiculo.toString());
@@ -104,11 +102,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const driverId = idCondutor;
-
       const response = await apiClient.get(`/Condutor/${driverId}`);
-
       const {
         id,
         nome,
@@ -116,7 +111,6 @@ export default function Dashboard() {
         categoriaHabilitacao,
         vencimentoHabilitacao
       } = response.data;
-
       setDriverInfo((prevDriverInfo) => ({
         ...prevDriverInfo,
         nomeCondutor: nome,
@@ -125,16 +119,12 @@ export default function Dashboard() {
         vencimentoHabilitacao
       }));
     };
-
     fetchData();
   }, [idCondutor]);
-
   useEffect(() =>{
     const fetchDataCar = async () => {
         const veiculoId = idVeiculo;
-
         const response = await apiClient.get(`/Veiculo/${veiculoId}`);
-
         const {
           id,
           placa,
@@ -142,7 +132,6 @@ export default function Dashboard() {
           anoFabricacao,
           kmAtual
         } = response.data;
-
         setVeiculoInfo((prevCarInfo) =>({
           ...prevCarInfo,
           placa: placa,
@@ -153,14 +142,10 @@ export default function Dashboard() {
     };
     fetchDataCar();
   }, [idVeiculo]);
-
-
-
   async function handleSetRouter(id, kmFinal, fimDeslocamento, observacao) {
     try {
       const apiClient = setupAPIClient();
       const RouterId = idRoute;
-
       const routeData = {
         id: RouterId,
         kmFinal,
@@ -181,7 +166,6 @@ export default function Dashboard() {
       console.log("Erro ao finalizar", err);
     }
   }
-
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -191,17 +175,14 @@ export default function Dashboard() {
           temperatureF: 0,
           summary: ""
         });
-  
-        const weatherData = response[0]; // Acessar o primeiro elemento do array
-        const { temperatureC, temperatureF } = weatherData; // Extrair as propriedades temperatureC e temperatureF
-  
+        const weatherData = response[0]; 
+        const { temperatureC, temperatureF } = weatherData;
         const weatherInfo = {
           data: weatherData.data,
-          temperatureC: temperatureC.toString(), // Converter para string
-          temperatureF: temperatureF.toString(), // Converter para string
+          temperatureC: temperatureC.toString(), 
+          temperatureF: temperatureF.toString(),
           summary: weatherData.summary
         };
-  
         setWeather(weatherInfo);
         console.log(weatherInfo);
       } catch (err) {
@@ -211,12 +192,9 @@ export default function Dashboard() {
   
     fetchWeather();
   }, []);
-  
-
   function handleClick() {
     handleSetRouter(idRoute, kmFinal, fimDeslocamento, observacao);
   }
-
   function handleOpenCard() {
     setExpanded((prevExpanded) => !prevExpanded);
   }

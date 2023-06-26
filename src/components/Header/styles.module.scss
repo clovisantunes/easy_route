@@ -7,7 +7,6 @@
   position: fixed;
   background-color: var(--dark-700);
   z-index: 1;
-
 }
 .navList {
   width: 95%;
@@ -22,20 +21,18 @@
   align-items: center;
   text-align: center;
   color: var(--blue-500);
-  border-bottom: solid 2px;
   cursor: pointer;
   svg {
     width: 2.5em;
     height: 2em;
-    margin-top: 1em;
+    margin-top: 0.3em;
     border-radius: 5px;
     border: none;
-    
   }
 
   h1 {
     font-size: 2em;
-    margin-top: .5em;
+    margin-top: 0.2em;
     font-weight: 200;
   }
 }
@@ -51,79 +48,70 @@
   }
 
   li {
-    
     margin: 0 1em;
     list-style-type: none;
-   
-    transition: all  500ms ease;
-    border-radius: 1vh;
+    transition: all 500ms ease;
+    border-radius: 0.5vh;
     color: var(--blue-100);
   }
 }
-.li{
-  padding: .5em;
+.li {
+  padding: 0.5em;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(120deg,var(--white), var(--blue-900));
+  background-image: linear-gradient(120deg, var(--white), var(--blue-900));
   background-repeat: no-repeat;
   background-size: 0 3px;
-  background-position:  left bottom;
+  background-position: left bottom;
   transition: background-size 500ms ease;
 }
 
-.li:hover{
-    color: var(--blue-100);
-    background-size: 100% 3px;
+.li:hover {
+  color: var(--blue-100);
+  background-size: 100% 3px;
 }
-.init{
-
+.init {
   font-size: 1.5rem;
   color: var(--grey-100);
 }
-.init:hover{
+.init:hover {
   color: var(--white);
 }
-.bar{
+.bar {
   width: 2px;
   height: 2em;
-  margin-top: .6em;
+  margin-top: 0.6em;
   background-color: var(--grey-100);
 }
-.client{
-  background-color:var(--blue-100);
-  
-
+.client {
+  background-color: var(--blue-100);
 }
-.liClient{
+.liClient {
   display: flex;
-  padding: .3em;
+  padding: 0.3em;
   font-size: 1.3em;
   font-weight: 300;
   color: var(--white);
-  
 }
-.client:hover{
+.client:hover {
   background-color: var(--blue-hover);
 }
 
-.driver{
+.driver {
   display: flex;
   background-color: var(--blue-900);
-  padding: .5em;
-  
+  padding: 0.5em;
 }
-.liDriver{
-
+.liDriver {
   font-size: 1.3em;
   font-weight: 300;
   color: var(--white);
-
 }
-.driver:hover{
+.driver:hover {
   background-color: var(--blue-1000);
 }
-@media (max-width: 760px){
+@media (max-width: 760px) {
   .navList {
     width: 75%;
     height: 80%;
@@ -131,37 +119,36 @@
     justify-content: space-between;
   }
 }
-@media (max-width: 660px){
-  .logo{
-    svg{
+@media (max-width: 660px) {
+  .logo {
+    svg {
       width: 1.2em;
     }
-    h1{
+    h1 {
       font-size: 1.2em;
     }
   }
-  .items{
+  .items {
     width: 100%;
-
   }
 
-  .li{
+  .li {
     padding: 0;
   }
-  .init{
+  .init {
     font-size: 1rem;
   }
-  .liClient{
+  .liClient {
     font-size: 1em;
   }
-  .client{
+  .client {
     padding: 0;
     height: 2em;
   }
-  .liDriver{
+  .liDriver {
     font-size: 1em;
   }
-  .driver{
+  .driver {
     padding: 0;
     height: 2em;
   }

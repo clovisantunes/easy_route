@@ -1,21 +1,19 @@
-import { useContext, FormEvent, useState } from "react";
-import { Input } from "@/components/UI/Input";
-import styles from "./styles.module.scss";
+import React, { useContext, FormEvent, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { BsGeoAltFill } from "react-icons/bs";
+import { AuthContext } from "@/contexts/AuthContext";
+import { Input } from "@/components/UI/Input";
 import { Button } from "@/components/UI/Button/Index";
 import { Navbar } from "@/components/Header";
-import Link from "next/link";
-import { AuthContext } from "@/contexts/AuthContext";
+import styles from "./styles.module.scss";
+
 
 export default function ClientSignIn() {
   const { signIn } = useContext(AuthContext);
-
   const [nome, setnome] = useState("");
   const [numeroHabilitação, setNumeroHabilitação] = useState("");
-
   const [loading, setLoading] = useState(false);
-
 
   return (
     <>
