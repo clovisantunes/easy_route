@@ -1,5 +1,5 @@
 
-<<<<<<< HEAD
+
 # EasyRoute
 
 Projeto de um sistema de criação de clientes, condutores e rotas utilizando a api de Deslocamento.
